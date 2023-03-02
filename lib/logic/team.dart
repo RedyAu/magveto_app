@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import 'game_provider.dart';
 import 'inventory.dart';
 import 'location.dart';
@@ -20,6 +22,13 @@ class Character {
   Character(this.letter, this.name, this.description);
 }
 
+class CharacterWithTeam {
+  final Character character;
+  final Team team;
+
+  CharacterWithTeam(this.character, this.team);
+}
+
 class Team {
   /// A csapat számjele. A karakterlapokon szereplő számjel.
   int id;
@@ -36,6 +45,29 @@ class Team {
   /// A csapat összes pontszáma.
   /// A játékosok összes pontszámának összege.
   int get totalPoints => 0; // TODO: implement
+
+  int get playerCount => characters.where((c) => c.player != null).length;
+
+  Widget idWidgetFor(Character character) {
+    return Container(
+      width: 45,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          id.toString() + character.letter,
+          style: TextStyle(
+              color:
+                  ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+              fontSize: 20),
+        ),
+      ),
+    );
+  }
 
   Team(this.id, this.color, this.characters);
 }

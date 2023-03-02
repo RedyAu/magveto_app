@@ -15,9 +15,6 @@ class Inventory {
   /// Áldás
   int blessing;
 
-  /// Plusz 3 pont
-  int extra3points;
-
   /// A játékos által összesen gyűjtött pontszám.
   int get totalPoints => 0; // TODO: implement
 
@@ -26,15 +23,13 @@ class Inventory {
     this.prayer = 0,
     this.charity = 0,
     this.blessing = 0,
-    this.extra3points = 0,
   });
 
   bool canTake(Inventory other) {
     return scripture >= other.scripture &&
         prayer >= other.prayer &&
         charity >= other.charity &&
-        blessing >= other.blessing &&
-        extra3points >= other.extra3points;
+        blessing >= other.blessing;
   }
 
   void take(Inventory other) {
@@ -42,7 +37,6 @@ class Inventory {
     prayer -= other.prayer;
     charity -= other.charity;
     blessing -= other.blessing;
-    extra3points -= other.extra3points;
   }
 
   void give(Inventory other) {
@@ -50,7 +44,6 @@ class Inventory {
     prayer += other.prayer;
     charity += other.charity;
     blessing += other.blessing;
-    extra3points += other.extra3points;
   }
 }
 
@@ -73,6 +66,5 @@ class InventoryTransaction extends Inventory {
           prayer: prayer,
           charity: charity,
           blessing: blessing,
-          extra3points: extra3points,
         );
 }

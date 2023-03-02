@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/logic/index.dart';
+import 'package:provider/provider.dart';
 
 import 'start/screen.dart';
 
@@ -11,12 +13,16 @@ class MagvetoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.from(
-          colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.amber, brightness: Brightness.dark),
-          useMaterial3: true),
-      home: HomeScreen(),
+    return ChangeNotifierProvider<GameProvider>(
+      create: (_) => GameProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.from(
+            colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.amber, brightness: Brightness.dark),
+            useMaterial3: true),
+        home: HomeScreen(),
+      ),
     );
   }
 }
@@ -43,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     Text("Magvető",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 50, color: Colors.amber)),
-                    Text("Nem hivatalos segítő app",
+                    Text("Nem hivatalos játékvezető app",
                         textAlign: TextAlign.center,
                         style:
                             TextStyle(fontSize: 20, color: Colors.grey[100])),
@@ -65,7 +71,13 @@ class HomeScreen extends StatelessWidget {
             Spacer(flex: 1),
             ElevatedButton(
               onPressed: () {},
-              child: Text("Játék betöltése"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Játék betöltése",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ),
             Spacer(flex: 5),
           ],

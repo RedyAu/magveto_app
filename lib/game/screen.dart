@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'actions/widget.dart';
 import 'inventory/widget.dart';
 import '../logic/roll.dart';
+import 'locations/widget.dart';
+import 'round/widget.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -10,17 +12,46 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
-      return MaterialApp(
-        home: Scaffold(
-            body: Flex(
-          direction: orientation == Orientation.portrait
-              ? Axis.vertical
-              : Axis.horizontal,
-          children: [
-            Expanded(child: InventoryWidget()),
-            Expanded(child: ActionsWidget())
-          ],
-        )),
+      return Scaffold(
+        backgroundColor: Colors.grey[800],
+        body: SafeArea(
+          child: Flex(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            direction: orientation == Orientation.portrait
+                ? Axis.vertical
+                : Axis.horizontal,
+            children: [
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: RoundView(),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: LocationsView(),
+                  ),
+                ],
+              )),
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: ActionsView(),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: InventoryView(),
+                  ),
+                ],
+              ))
+            ],
+          ),
+        ),
       );
     });
   }
@@ -50,11 +81,10 @@ class _RollDialogState extends State<RollDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           RollWidget(rollStream: rollStream),
-          Hero(tag: "Roll button", child: ElevatedButton(
+          FilledButton(
             onPressed: !_isRolling ? _startRoll : null,
             child: const Text('Roll'),
-          ))
-          
+          )
         ],
       ),
     );

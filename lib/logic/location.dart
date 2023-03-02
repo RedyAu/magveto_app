@@ -11,12 +11,12 @@ enum LocationType {
   church
 }
 
+enum TileType { path, rocky, thorny, redeemed }
+
 class Location {
   LocationType type = LocationType.outpost;
 
-  bool pathTileRedeemed = false;
-  bool rockyTileRedeemed = false;
-  bool thornyTileRedeemed = false;
+  List<TileType> tiles = [TileType.path, TileType.rocky, TileType.thorny];
 
   /// Bibliaiskola
   int scriptureService = 0;
