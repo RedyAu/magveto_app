@@ -22,9 +22,12 @@ class _NewScreenState extends State<NewScreen>
   late FocusNode newPlayerNameFocusNode;
   bool teamsReady = false;
   List<Team> teams = [];
+  late final List<Team> defaultTeams;
 
   @override
   void initState() {
+    teams = [];
+    defaultTeams = getDefaultTeams();
     super.initState();
     tabController = TabController(length: 3, vsync: this);
     newPlayerNameController = TextEditingController();
@@ -91,24 +94,29 @@ class _NewScreenState extends State<NewScreen>
                             Card(
                               elevation: 10,
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child: TextField(
-                                        focusNode: newPlayerNameFocusNode,
-                                        autofocus: true,
-                                        controller: newPlayerNameController,
-                                        decoration: const InputDecoration(
-                                          labelText: "Játékos neve",
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        child: TextField(
+                                          focusNode: newPlayerNameFocusNode,
+                                          autofocus: true,
+                                          controller: newPlayerNameController,
+                                          decoration: const InputDecoration(
+                                            labelText: "Játékos neve",
+                                          ),
+                                          onChanged: (_) => setState(() {}),
+                                          onSubmitted: (value) => setState(() {
+                                            if (value.isEmpty) return;
+                                            players.add(Player(value));
+                                            newPlayerNameController.clear();
+                                            newPlayerNameFocusNode
+                                                .requestFocus();
+                                          }),
                                         ),
-                                        onChanged: (_) => setState(() {}),
-                                        onSubmitted: (value) => setState(() {
-                                          if (value.isEmpty) return;
-                                          players.add(Player(value));
-                                          newPlayerNameController.clear();
-                                          newPlayerNameFocusNode.requestFocus();
-                                        }),
                                       ),
                                     ),
                                     // yellow and round add button
@@ -165,22 +173,22 @@ class _NewScreenState extends State<NewScreen>
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: gameTeams.length,
+                        itemCount: defaultTeams.length,
                         itemBuilder: (context, index) {
                           return Card(
                             margin: EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 5),
                             elevation:
-                                teams.contains(gameTeams[index]) ? 10 : 0,
+                                teams.contains(defaultTeams[index]) ? 10 : 0,
                             child: ListTile(
                               leading: Switch(
-                                value: teams.contains(gameTeams[index]),
+                                value: teams.contains(defaultTeams[index]),
                                 onChanged: (value) {
                                   setState(() {
                                     if (value) {
-                                      teams.add(gameTeams[index]);
+                                      teams.add(defaultTeams[index]);
                                     } else {
-                                      teams.remove(gameTeams[index]);
+                                      teams.remove(defaultTeams[index]);
                                     }
                                   });
                                 },
@@ -189,12 +197,12 @@ class _NewScreenState extends State<NewScreen>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CharacterTile(
-                                    gameTeams[index],
-                                    gameTeams[index].characters[0],
+                                    defaultTeams[index],
+                                    defaultTeams[index].characters[0],
                                   ),
                                   CharacterTile(
-                                    gameTeams[index],
-                                    gameTeams[index].characters[1],
+                                    defaultTeams[index],
+                                    defaultTeams[index].characters[1],
                                   ),
                                 ],
                               ),
@@ -406,7 +414,7 @@ class _NewScreenState extends State<NewScreen>
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-          elevation: 20,
+          elevation: 5,
           child: () {
             switch (tabController.index) {
               case 0:

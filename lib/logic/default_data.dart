@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'team.dart';
 
-final List<Team> gameTeams = [
+List<Team> getDefaultTeams() => [
   Team(1, Colors.yellow, [
     Character("A", "Joe, az áldott",
         "Ha valaki áldást kap, Joe is részesedik belőle (ő is kap egy áldáscsillagot)."),
