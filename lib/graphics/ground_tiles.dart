@@ -10,7 +10,7 @@ class GroundTile extends StatelessWidget {
   Widget build(BuildContext context) {
     // hexagon shaped container
     return AspectRatio(
-      aspectRatio: 1,
+      aspectRatio: 0.866, // sqrt(3) / 2, hexagon shape
       child: CustomPaint(
         painter: GroundTilePainter(tileType),
       ),
