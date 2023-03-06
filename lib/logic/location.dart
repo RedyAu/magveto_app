@@ -11,12 +11,23 @@ enum LocationType {
   church
 }
 
-enum TileType { path, rocky, thorny, redeemed }
+enum GroundTileType { path, rocky, thorny }
+
+class GroundTile {
+  GroundTileType type;
+  bool isRedeemed = false;
+
+  GroundTile(this.type);
+}
 
 class Location {
   LocationType type = LocationType.outpost;
 
-  List<TileType> tiles = [TileType.path, TileType.rocky, TileType.thorny];
+  List<GroundTile> tiles = [
+    GroundTile(GroundTileType.path),
+    GroundTile(GroundTileType.rocky),
+    GroundTile(GroundTileType.thorny),
+  ];
 
   /// Bibliaiskola
   int scriptureService = 0;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/graphics/background.dart';
 
-import 'actions/widget.dart';
-import 'inventory/widget.dart';
+import 'actions/section.dart';
+import 'inventory/section.dart';
 import '../logic/roll.dart';
-import 'locations/widget.dart';
-import 'round/widget.dart';
+import 'location/section.dart';
+import 'round/section.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -12,45 +13,39 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
-      return Scaffold(
-        backgroundColor: Colors.grey[800],
-        body: SafeArea(
-          child: Flex(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            direction: orientation == Orientation.portrait
-                ? Axis.vertical
-                : Axis.horizontal,
-            children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: RoundView(),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: LocationsView(),
-                  ),
-                ],
-              )),
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: ActionsView(),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: InventoryView(),
-                  ),
-                ],
-              ))
-            ],
-          ),
+      return MagvetoScaffold(
+        child: Flex(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          direction: orientation == Orientation.portrait
+              ? Axis.vertical
+              : Axis.horizontal,
+          children: [
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: RoundSection(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: LocationSection(),
+                ),
+              ],
+            )),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: ActionsSection(),
+                ),
+                InventorySection(),
+              ],
+            ))
+          ],
         ),
       );
     });

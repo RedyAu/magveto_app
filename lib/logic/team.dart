@@ -51,22 +51,36 @@ class Team {
   Widget idWidgetFor(Character character) {
     return Container(
       width: 45,
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: Text(
-          id.toString() + character.letter,
-          style: TextStyle(
-              color:
-                  ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
-              fontSize: 20),
+      decoration:
+          BoxDecoration(color: color, shape: BoxShape.circle, boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.5),
+          spreadRadius: 1,
+          blurRadius: 2,
+          offset: Offset(0, 1), // changes position of shadow
+        ),
+      ]),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 1, 8, 4),
+          child: Text(
+            id.toString() + character.letter,
+            style: TextStyle(
+                color: ThemeData.estimateBrightnessForColor(color) ==
+                        Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
+  }
+
+  String idStringFor(Character character) {
+    return id.toString() + character.letter;
   }
 
   Team(this.id, this.color, this.characters);

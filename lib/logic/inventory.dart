@@ -68,3 +68,13 @@ class InventoryTransaction extends Inventory {
           blessing: blessing,
         );
 }
+
+enum ItemType {
+  scripture,
+  prayer,
+  charity,
+  blessing,
+  scriptureService,
+  prayerService,
+  charityService
+}

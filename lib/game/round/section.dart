@@ -6,12 +6,12 @@ import 'package:provider/provider.dart';
 import '../../logic/index.dart';
 import 'indicator.dart';
 
-class RoundView extends StatefulWidget {
+class RoundSection extends StatefulWidget {
   @override
-  State<RoundView> createState() => _RoundViewState();
+  State<RoundSection> createState() => _RoundSectionState();
 }
 
-class _RoundViewState extends State<RoundView> {
+class _RoundSectionState extends State<RoundSection> {
   late InfiniteScrollController _controller;
 
   @override
@@ -39,10 +39,6 @@ class _RoundViewState extends State<RoundView> {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            width: 80,
-            child: Text("Picture of\n${game.characterInPlay.name}"),
-          ),
           Expanded(
             child: Column(
               children: [
@@ -66,26 +62,43 @@ class _RoundViewState extends State<RoundView> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 3, right: 8, bottom: 8),
+                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 3),
                   child: Row(
                     children: [
+                      Text(
+                        '${game.round}. kör  ',
+                        style: Theme.of(context).textTheme.titleLarge,
+                        textAlign: TextAlign.start,
+                      ),
                       Expanded(
                         child: Text(
+                          textAlign: TextAlign.center,
                           '${game.characterInPlay.name}',
                           style: Theme.of(context).textTheme.titleLarge,
                           overflow: TextOverflow.fade,
                           softWrap: false,
                         ),
                       ),
-                      Text(
-                        '${game.round}. kör',
-                        style: Theme.of(context).textTheme.titleLarge,
-                        textAlign: TextAlign.end,
-                      ),
                     ],
                   ),
                 ),
               ],
+            ),
+          ),
+          Transform.scale(
+            scale: 1.5,
+            child: Transform.translate(
+              offset: const Offset(-10, 5),
+              child: SizedBox(
+                width: 80,
+                child: Image.asset(
+                  'assets/character/${game.teamInPlay.idStringFor(game.characterInPlay)}.png',
+                  fit: BoxFit.none,
+                  scale: 7.3,
+                  cacheHeight: 750,
+                  filterQuality: FilterQuality.medium,
+                ),
+              ),
             ),
           ),
         ],
