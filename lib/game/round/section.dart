@@ -44,6 +44,7 @@ class _RoundSectionState extends State<RoundSection> {
               children: [
                 Expanded(
                   child: Card(
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: InfiniteCarousel.builder(

@@ -25,7 +25,9 @@ class RoundIndicator extends StatelessWidget {
           color: isCurrent ? Colors.grey[700] : Colors.grey[800],
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isCurrent ? Colors.amber : Colors.grey[700]!,
+            color: isCurrent
+                ? Theme.of(context).colorScheme.primary
+                : Colors.grey[700]!,
             width: 2,
           ),
         ),

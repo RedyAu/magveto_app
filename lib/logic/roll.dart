@@ -11,7 +11,7 @@ extension RollUtils on Roll {
   static Roll random() {
     return Roll.values[Random().nextInt(Roll.values.length)];
   }
-
+/*
   InventoryTransaction transactionFor(Character character) {
     switch (this) {
       case Roll.scripture:
@@ -37,7 +37,7 @@ extension RollUtils on Roll {
       default:
         throw Exception('Roll $this cannot be converted to transaction');
     }
-  }
+  }*/
 }
 
 Stream<Roll> randomRollStream() async* {

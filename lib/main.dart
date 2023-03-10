@@ -19,8 +19,8 @@ class MagvetoApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.from(
-            colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.amber, brightness: Brightness.dark),
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.amber, brightness: Brightness.dark),
             useMaterial3: true),
         home: HomeScreen(),
       ),

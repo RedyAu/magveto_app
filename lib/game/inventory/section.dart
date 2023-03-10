@@ -3,7 +3,6 @@ import 'package:magveto_app/graphics/inventory_slot.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
-import '../screen.dart';
 
 class InventorySection extends StatelessWidget {
   const InventorySection({super.key});

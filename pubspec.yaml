@@ -7,6 +7,8 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  bordered_text: ^2.0.0
+  fading_edge_scrollview: ^3.0.0
   flutter:
     sdk: flutter
   infinite_carousel: ^1.0.2

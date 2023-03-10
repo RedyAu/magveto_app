@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import 'game_provider.dart';
 import 'inventory.dart';
 import 'location.dart';
 
@@ -48,9 +45,10 @@ class Team {
 
   int get playerCount => characters.where((c) => c.player != null).length;
 
-  Widget idWidgetFor(Character character) {
+  Widget idWidgetFor([Character? character]) {
     return Container(
       width: 45,
+      height: 45,
       decoration:
           BoxDecoration(color: color, shape: BoxShape.circle, boxShadow: [
         BoxShadow(
@@ -65,14 +63,25 @@ class Team {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 1, 8, 4),
           child: Text(
-            id.toString() + character.letter,
+            id.toString() + (character?.letter ?? ""),
             style: TextStyle(
-                color: ThemeData.estimateBrightnessForColor(color) ==
-                        Brightness.dark
-                    ? Colors.white
-                    : Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+              color:
+                  ThemeData.estimateBrightnessForColor(color) == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  offset: Offset(0.0, 0.0),
+                  color: ThemeData.estimateBrightnessForColor(color) ==
+                          Brightness.dark
+                      ? Colors.black
+                      : Colors.white,
+                  blurRadius: 2,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -84,4 +93,38 @@ class Team {
   }
 
   Team(this.id, this.color, this.characters);
+}
+
+class BrotherTeam {
+  final Team team;
+  int roads = 0;
+
+  BrotherTeam(this.team);
+}
+
+class BrotherConnection {
+  bool get isActive => _isActive && isFinished;
+  // can get inactivated by event
+  bool _isActive = true;
+  set isActive(bool value) => _isActive = value;
+
+  bool isFinished = false;
+  late final List<BrotherTeam> between;
+  List<Team> get teams => between.map((e) => e.team).toList();
+
+  int get roadLength =>
+      between.fold(0, (value, element) => value + element.roads);
+
+  // check whether any of the teams in the between list is the given team
+  bool hasTeam(Team team) => between.any((element) => element.team == team);
+
+  // road can be finished if total length is minimum 4, and each team has at least 1 road. also return false if road is already active.
+  bool get canBeFinished =>
+      roadLength >= 4 &&
+      between.every((element) => element.roads >= 1) &&
+      !isActive;
+
+  BrotherConnection(BrotherTeam team1, BrotherTeam team2) {
+    between = List.from([team1, team2], growable: false);
+  }
 }

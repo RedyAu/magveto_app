@@ -125,7 +125,9 @@ class _NewScreenState extends State<NewScreen>
                                       // yellow and round add button
                                       IconButton(
                                         icon: const Icon(Icons.add),
-                                        color: Colors.amber,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         onPressed:
                                             newPlayerNameController.text.isEmpty
                                                 ? null
@@ -143,7 +145,9 @@ class _NewScreenState extends State<NewScreen>
                                       ),
                                       IconButton(
                                           icon: const Icon(Icons.done),
-                                          color: Colors.amber,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                           onPressed: () =>
                                               newPlayerNameFocusNode
                                                   .nextFocus())
@@ -416,7 +420,7 @@ class _NewScreenState extends State<NewScreen>
               child: TabPageSelector(
                 controller: tabController,
                 color: Colors.grey[500],
-                selectedColor: Colors.amber,
+                selectedColor: Theme.of(context).colorScheme.primary,
                 borderStyle: BorderStyle.none,
                 indicatorSize: 15,
               ),

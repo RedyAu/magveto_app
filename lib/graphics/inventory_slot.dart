@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:magveto_app/graphics/item.dart';
 import '../logic/inventory.dart';
 
 class InventorySlotWidget extends StatelessWidget {
@@ -38,22 +39,7 @@ class InventorySlotWidget extends StatelessWidget {
                 count,
                 (int index) => randomItemTransformForSeed(
                   index,
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: Card(
-                        shape:
-                            type == ItemType.blessing ? CircleBorder() : null,
-                        surfaceTintColor: Colors.transparent,
-                        elevation: 7,
-                        color: colorForType(type),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: Image.asset(
-                            "assets/item/${type.name}.png",
-                            filterQuality: FilterQuality.medium,
-                          ),
-                        )),
-                  ),
+                  ItemWidget(type: type),
                 ),
               ),
               Positioned(
@@ -80,25 +66,6 @@ class InventorySlotWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Color colorForType(ItemType type) {
-  switch (type) {
-    case ItemType.scripture:
-      return Color(0xffeadd7c);
-    case ItemType.prayer:
-      return Color(0xffb492b3);
-    case ItemType.charity:
-      return Color(0xffa7c477);
-    case ItemType.blessing:
-      return Color(0xffdca543);
-    case ItemType.scriptureService:
-      return Color(0xffe7d04f);
-    case ItemType.prayerService:
-      return Color(0xff955594);
-    case ItemType.charityService:
-      return Color(0xff86a25c);
   }
 }
 

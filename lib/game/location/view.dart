@@ -22,7 +22,7 @@ class LocationView extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: team.color, width: 3),
               borderRadius: BorderRadius.circular(8),
-              color: Colors.black38),
+              color: Theme.of(context).colorScheme.primaryContainer),
           padding: EdgeInsets.all(3),
           margin: EdgeInsets.all(8),
           child: Flex(

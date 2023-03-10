@@ -6,6 +6,9 @@ class GameProvider extends ChangeNotifier {
   List<Team> _teams = [];
   List<Team> get teams => _teams;
 
+  /// **Call notify() after editing this list!**
+  List<BrotherConnection> brotherConnections = [];
+
   List<CharacterWithTeam> get charactersWithTeams => _teams.expand((team) {
         return team.characters.map((character) {
           return CharacterWithTeam(character, team);
@@ -41,19 +44,6 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool executeInventoryTransaction(InventoryTransaction transaction) {
-    // null esetén a játék adja vagy veszi el a tárgyakat.
-    if (transaction.from != null) {
-      // TODO: initialize the inventory of the character at the start of the game
-      if (!transaction.from!.inventory!.canTake(transaction)) {
-        return false;
-      }
-      transaction.from!.inventory!.take(transaction);
-    }
-    transaction.to.inventory!.give(transaction);
-    return true;
-  }
-
   void startGame(List<Team> teams) {
     _teams = teams;
     // init all inventories
@@ -63,10 +53,10 @@ class GameProvider extends ChangeNotifier {
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = Inventory(
-          scripture: 1,
-          prayer: 1,
-          charity: 1,
-          blessing: 1,
+          scripture: 3,
+          prayer: 3,
+          charity: 3,
+          blessing: 3,
         );
         character.currentLocation = teamLocation;
       }
