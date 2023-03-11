@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/game/actions/brethren/connection_tile.dart';
-import 'package:magveto_app/game/actions/brethren/build_road_dialog.dart';
+import 'package:magveto_app/game/actions/roads/road_tile.dart';
+import 'package:magveto_app/game/actions/roads/dialog/dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../../logic/index.dart';
 
-class BrethrenView extends StatelessWidget {
-  const BrethrenView({Key? key}) : super(key: key);
+class RoadsView extends StatelessWidget {
+  const RoadsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,7 @@ class BrethrenView extends StatelessWidget {
         child: Row(
           children: [
             Tooltip(
+              preferBelow: false,
               message: game.characterInPlay.currentLocation!.type ==
                       LocationType.outpost
                   ? "Csak 2. (gyülekezeti ház) és 3. (templomos gyülekezet) szinten elérhető!"
@@ -68,7 +69,7 @@ class BrethrenView extends StatelessWidget {
                     SizedBox(width: 8),
                     ...game.brotherConnections
                         .where((element) => element.hasTeam(game.teamInPlay))
-                        .map((c) => BrotherConnectionTile(
+                        .map((c) => RoadTileWidget(
                             connection: c, teamOfView: game.teamInPlay)),
                     if (!game.brotherConnections
                         .any((element) => element.hasTeam(game.teamInPlay)))

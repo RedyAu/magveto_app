@@ -7,6 +7,7 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  auto_size_text: ^3.0.0
   bordered_text: ^2.0.0
   fading_edge_scrollview: ^3.0.0
   flutter:

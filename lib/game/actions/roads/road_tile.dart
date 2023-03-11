@@ -3,12 +3,11 @@ import 'package:magveto_app/graphics/road_count.dart';
 
 import '../../../logic/index.dart';
 
-class BrotherConnectionTile extends StatelessWidget {
-  final BrotherConnection connection;
+class RoadTileWidget extends StatelessWidget {
+  final RoadConnection connection;
   final Team teamOfView;
 
-  BrotherConnectionTile(
-      {Key? key, required this.connection, required this.teamOfView})
+  RoadTileWidget({Key? key, required this.connection, required this.teamOfView})
       : super(key: key);
 
   @override

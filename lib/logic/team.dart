@@ -61,7 +61,7 @@ class Team {
       child: FittedBox(
         fit: BoxFit.contain,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 1, 8, 4),
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
           child: Text(
             id.toString() + (character?.letter ?? ""),
             style: TextStyle(
@@ -95,21 +95,21 @@ class Team {
   Team(this.id, this.color, this.characters);
 }
 
-class BrotherTeam {
+class TeamRoads {
   final Team team;
   int roads = 0;
 
-  BrotherTeam(this.team);
+  TeamRoads(this.team);
 }
 
-class BrotherConnection {
+class RoadConnection {
   bool get isActive => _isActive && isFinished;
   // can get inactivated by event
   bool _isActive = true;
   set isActive(bool value) => _isActive = value;
 
   bool isFinished = false;
-  late final List<BrotherTeam> between;
+  late final List<TeamRoads> between;
   List<Team> get teams => between.map((e) => e.team).toList();
 
   int get roadLength =>
@@ -124,7 +124,7 @@ class BrotherConnection {
       between.every((element) => element.roads >= 1) &&
       !isActive;
 
-  BrotherConnection(BrotherTeam team1, BrotherTeam team2) {
+  RoadConnection(TeamRoads team1, TeamRoads team2) {
     between = List.from([team1, team2], growable: false);
   }
 }

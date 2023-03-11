@@ -25,6 +25,8 @@ class Inventory {
     this.blessing = 0,
   });
 
+  List<int> get asItemsList => [scripture, prayer, charity, blessing];
+
   bool canTake(Inventory other) {
     return scripture >= other.scripture &&
         prayer >= other.prayer &&

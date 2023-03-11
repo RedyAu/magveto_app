@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/index.dart';
@@ -34,10 +35,21 @@ class RoundIndicator extends StatelessWidget {
         child: Column(
           children: [
             Expanded(child: character.team.idWidgetFor(character.character)),
-            Text(character.character.player!.name,
-                style: TextStyle(
-                  fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
-                )),
+            SizedBox(
+              height: 20,
+              child: Center(
+                child: AutoSizeText(
+                  character.character.player!.name,
+                  maxLines: 1,
+                  minFontSize: 8,
+                  softWrap: false,
+                  overflow: TextOverflow.fade,
+                  style: TextStyle(
+                    fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

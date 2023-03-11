@@ -23,8 +23,9 @@ class ActionDialog extends StatelessWidget {
         shadowColor: Colors.black,
         clipBehavior: Clip.antiAlias,
         child: MagvetoBackground(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
             children: [
               Hero(
                 tag: heroTag,
@@ -41,7 +42,10 @@ class ActionDialog extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(padding: const EdgeInsets.all(8.0), child: child),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: child,
+              ),
             ],
           ),
         ));

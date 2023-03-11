@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart' show ChangeNotifier;
+import 'package:flutter/material.dart' show BuildContext, ChangeNotifier;
+import 'package:provider/provider.dart';
 
 import 'index.dart';
 
@@ -7,7 +8,7 @@ class GameProvider extends ChangeNotifier {
   List<Team> get teams => _teams;
 
   /// **Call notify() after editing this list!**
-  List<BrotherConnection> brotherConnections = [];
+  List<RoadConnection> brotherConnections = [];
 
   List<CharacterWithTeam> get charactersWithTeams => _teams.expand((team) {
         return team.characters.map((character) {
@@ -63,6 +64,10 @@ class GameProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  static GameProvider of(BuildContext context, {bool listen = false}) {
+    return Provider.of<GameProvider>(context, listen: listen);
   }
 }
 

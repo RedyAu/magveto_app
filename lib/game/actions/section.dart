@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
-import 'brethren/view.dart';
+import 'roads/view.dart';
 
 class ActionsSection extends StatelessWidget {
   const ActionsSection({super.key});
@@ -13,7 +13,7 @@ class ActionsSection extends StatelessWidget {
       builder: (context, game, child) => Container(
         child: Column(
           children: [
-            BrethrenView(),
+            RoadsView(),
             Text('Test actions for: ${game.characterInPlay.name}'),
             ElevatedButton(
               onPressed: () {
@@ -49,30 +49,6 @@ class ActionsSection extends StatelessWidget {
                 game.notify();
               },
               child: const Text('Reset redeem, change type'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                game.brotherConnections.add(
-                  BrotherConnection(
-                    BrotherTeam(game.teams[0])..roads = 1,
-                    BrotherTeam(game.teams[1])..roads = 5,
-                  )..isFinished = true,
-                );
-                game.notify();
-              },
-              child: const Text('Add a brother connection'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                game.brotherConnections.add(
-                  BrotherConnection(
-                    BrotherTeam(game.teams[0])..roads = 1,
-                    BrotherTeam(game.teams[1])..roads = 5,
-                  ),
-                );
-                game.notify();
-              },
-              child: const Text('Add inactive brother connection'),
             ),
           ],
         ),
