@@ -1,3 +1,4 @@
+import 'index.dart';
 
 enum LocationType {
   /// Missziói állomás
@@ -28,6 +29,8 @@ class Location {
     GroundTile(GroundTileType.thorny),
   ];
 
+  Team team;
+
   /// Bibliaiskola
   int scriptureService = 0;
 
@@ -37,5 +40,5 @@ class Location {
   /// Diakóniai szolgálat
   int charityService = 0;
 
-  Location();
+  Location(this.team);
 }

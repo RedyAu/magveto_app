@@ -38,11 +38,11 @@ class GameScreen extends StatelessWidget {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                InventorySection(),
                 Expanded(
                   flex: 3,
                   child: ActionsSection(),
                 ),
-                InventorySection(),
               ],
             ))
           ],

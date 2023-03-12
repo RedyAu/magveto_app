@@ -16,6 +16,10 @@ class GameProvider extends ChangeNotifier {
         });
       }).toList();
 
+  List<Character> get characters => _teams.expand((team) {
+        return team.characters;
+      }).toList();
+
   int _teamInPlay = 0;
   int _characterOfTeamInPlay = 0;
 
@@ -50,19 +54,57 @@ class GameProvider extends ChangeNotifier {
     // init all inventories
     // instantiate a location for each team, and give that location to each member of the team
     for (var team in _teams) {
-      Location teamLocation = Location();
+      Location teamLocation = new Location(team);
       for (var character in team.characters) {
         // by default, the character gets one of each item
-        character.inventory = Inventory(
-          scripture: 3,
-          prayer: 3,
-          charity: 3,
-          blessing: 3,
+        character.inventory = new Inventory(
+          scripture: 1,
+          prayer: 1,
+          charity: 1,
+          blessing: 1,
         );
-        character.currentLocation = teamLocation;
+        moveCharacterToLocation(character, teamLocation);
       }
     }
 
+    notifyListeners();
+  }
+
+  void moveCharacterToLocation(Character character, Location location) {
+    // find all characters already at the location
+    List<CharacterWithTeam> charactersAtLocation =
+        charactersWithTeams.where((c) {
+      return c.character.currentLocation == location;
+    }).toList();
+
+    // if the location already has two characters, throw an error
+    if (charactersAtLocation.length >= 2) {
+      throw Exception("Location already has two characters!");
+    }
+    // if either inventory is null, throw an error
+    if (character.inventory == null ||
+        charactersAtLocation
+            .any((element) => element.character.inventory == null)) {
+      throw Exception("Character inventory is null!");
+    }
+
+    // if there are no characters at the location, just move the character there
+    if (charactersAtLocation.isEmpty) {
+      character.currentLocation = location;
+      notifyListeners();
+      print(
+          "Moving ${character.name} to empty location: ${location.hashCode}.");
+      return;
+    }
+
+    print(
+        "Moving ${character.name} to location: ${location.hashCode}.\nMerging inventories with ${charactersAtLocation.first.character.name}.");
+    // if location already has a character, merge their inventories
+    Character otherCharacter = charactersAtLocation.first.character;
+    otherCharacter.inventory!.give(character.inventory!);
+    character.inventory = otherCharacter.inventory;
+
+    character.currentLocation = location;
     notifyListeners();
   }
 

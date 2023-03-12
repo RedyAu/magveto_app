@@ -154,7 +154,9 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
                                   selectedConnection: selectedConnection,
                                   tabController: tabController),
                               FinishRoadTab(
-                                  selectedConnection: selectedConnection)
+                                selectedConnection: selectedConnection,
+                                tabController: tabController,
+                              )
                             ],
                           ),
                         ),
