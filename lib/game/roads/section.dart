@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/game/actions/roads/road_tile.dart';
-import 'package:magveto_app/game/actions/roads/dialog/dialog.dart';
+import 'package:magveto_app/game/roads/road_tile.dart';
+import 'package:magveto_app/game/roads/dialog/dialog.dart';
 import 'package:provider/provider.dart';
 
-import '../../../logic/index.dart';
+import '../../logic/index.dart';
 
-class RoadsView extends StatelessWidget {
-  const RoadsView({Key? key}) : super(key: key);
+class RoadsSection extends StatelessWidget {
+  const RoadsSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

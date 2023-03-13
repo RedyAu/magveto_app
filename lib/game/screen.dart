@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/game/roads/section.dart';
 import 'package:magveto_app/graphics/background.dart';
 
 import 'actions/section.dart';
@@ -39,10 +40,8 @@ class GameScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 InventorySection(),
-                Expanded(
-                  flex: 3,
-                  child: ActionsSection(),
-                ),
+                RoadsSection(),
+                ActionsSection(),
               ],
             ))
           ],

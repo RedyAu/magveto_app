@@ -1,9 +1,9 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/game/actions/roads/dialog/tabs/build.dart';
-import 'package:magveto_app/game/actions/roads/road_tile.dart';
-import 'package:magveto_app/game/actions/roads/dialog/tabs/pill_amount_button.dart';
+import 'package:magveto_app/game/roads/dialog/tabs/build.dart';
+import 'package:magveto_app/game/roads/road_tile.dart';
+import 'package:magveto_app/game/roads/dialog/tabs/pill_amount_button.dart';
 import 'package:magveto_app/graphics/index.dart';
 import 'package:magveto_app/logic/index.dart';
 import 'package:provider/provider.dart';
