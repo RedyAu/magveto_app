@@ -16,6 +16,7 @@ class RoadsView extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         height: 80,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Tooltip(
               preferBelow: false,
@@ -36,7 +37,7 @@ class RoadsView extends StatelessWidget {
                               builder: (context) => BuildRoadDialog(context),
                             ),
                           );
-                        }, // TODO: implement
+                        },
                   icon: Icon(Icons.add_road),
                   label: Text("Út építése"),
                 ),

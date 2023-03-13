@@ -23,3 +23,6 @@ flutter:
     - assets/tile/
     - assets/other/
     - assets/location/
+    - assets/button/
+    - assets/button/community/
+    - assets/button/outpost/

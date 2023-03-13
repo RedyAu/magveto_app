@@ -29,6 +29,8 @@ class GameProvider extends ChangeNotifier {
   Character get characterInPlay =>
       teamInPlay.characters[_characterOfTeamInPlay];
 
+  Location get locationInPlay => characterInPlay.currentLocation!;
+
   int _round = 1;
   int get round => _round;
 

@@ -20,62 +20,63 @@ class FinishRoadTab extends StatelessWidget {
     return Consumer<GameProvider>(builder: (context, game, child) {
       return Column(
         children: [
-          SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    game.teamInPlay.idWidgetFor(game.characterInPlay),
-                    Transform.translate(
-                      offset: Offset(20, 20),
-                      child: SizedBox(
-                        height: 40,
-                        child: Opacity(
-                          opacity: game.characterInPlay.inventory!.blessing > 0
-                              ? 1
-                              : 0.5,
-                          child: ItemWidget(type: ItemType.blessing),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      game.teamInPlay.idWidgetFor(game.characterInPlay),
+                      Transform.translate(
+                        offset: Offset(20, 20),
+                        child: SizedBox(
+                          height: 40,
+                          child: Opacity(
+                            opacity: game.characterInPlay.inventory!.blessing > 0
+                                ? 1
+                                : 0.5,
+                            child: ItemWidget(type: ItemType.blessing),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    selectedConnection.teams
-                        .firstWhere((element) => element != game.teamInPlay)
-                        .idWidgetFor(null),
-                    Transform.translate(
-                      offset: Offset(20, 20),
-                      child: SizedBox(
-                        height: 40,
-                        child: Opacity(
-                          opacity: selectedConnection.teams
-                                      .firstWhere((element) =>
-                                          element != game.teamInPlay)
-                                      .characters
-                                      .first
-                                      .inventory!
-                                      .blessing >
-                                  0
-                              ? 1
-                              : 0.5,
-                          child: ItemWidget(type: ItemType.blessing),
+                SizedBox(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      selectedConnection.teams
+                          .firstWhere((element) => element != game.teamInPlay)
+                          .idWidgetFor(null),
+                      Transform.translate(
+                        offset: Offset(20, 20),
+                        child: SizedBox(
+                          height: 40,
+                          child: Opacity(
+                            opacity: selectedConnection.teams
+                                        .firstWhere((element) =>
+                                            element != game.teamInPlay)
+                                        .characters
+                                        .first
+                                        .inventory!
+                                        .blessing >
+                                    0
+                                ? 1
+                                : 0.5,
+                            child: ItemWidget(type: ItemType.blessing),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          SizedBox(height: 40),
           ActionSegmentTitle('Készen álltok?'),
           ActionSegmentTitle(
             'Ha a játékpályán is elkészült az út, 1-1 áldás beadásával aktiválhatjátok.',

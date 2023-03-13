@@ -45,6 +45,8 @@ class Team {
 
   int get playerCount => characters.where((c) => c.player != null).length;
 
+  int rimsRedeemed = 0;
+
   Widget idWidgetFor([Character? character]) {
     return Container(
       width: 45,
