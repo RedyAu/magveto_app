@@ -10,7 +10,9 @@ class BuildRoadTab extends StatefulWidget {
   RoadConnection selectedConnection;
   TabController tabController;
 
-  BuildRoadTab({Key? key, required this.selectedConnection, required this.tabController}) : super(key: key);
+  BuildRoadTab(
+      {Key? key, required this.selectedConnection, required this.tabController})
+      : super(key: key);
 
   @override
   State<BuildRoadTab> createState() => _BuildRoadTabState();
@@ -90,7 +92,7 @@ class _BuildRoadTabState extends State<BuildRoadTab>
               4,
               (index) => PillAmountButton(
                   itemsToUse: itemsToUse,
-                  playerInventory: game.characterInPlay.inventory!.asItemsList,
+                  playerInventory: game.characterInPlay.inventory!.asIntList,
                   itemTypeIndex: index,
                   resolveItemsToUse: resolveItemsToUse),
             ),
@@ -182,7 +184,7 @@ class _BuildRoadTabState extends State<BuildRoadTab>
               style: TextStyle(color: Colors.amberAccent)),
           TextSpan(
               text:
-                  ' / ${game.characterInPlay.inventory!.asItemsList[itemTypeIndex]}'),
+                  ' / ${game.characterInPlay.inventory!.asIntList[itemTypeIndex]}'),
         ],
       ),
     );

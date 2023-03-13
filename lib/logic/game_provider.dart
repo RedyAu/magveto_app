@@ -60,10 +60,10 @@ class GameProvider extends ChangeNotifier {
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = new Inventory(
-          scripture: 1,
-          prayer: 1,
-          charity: 1,
-          blessing: 1,
+          scripture: 2,
+          prayer: 2,
+          charity: 2,
+          blessing: 2,
         );
         moveCharacterToLocation(character, teamLocation);
       }
@@ -100,7 +100,7 @@ class GameProvider extends ChangeNotifier {
     }
 
     print(
-        "Moving ${character.name} to location: ${location.hashCode}.\nMerging inventories with ${charactersAtLocation.first.character.name}.");
+        "Moving ${character.name} to location: ${location.hashCode}. Merging inventories with ${charactersAtLocation.first.character.name}.");
     // if location already has a character, merge their inventories
     Character otherCharacter = charactersAtLocation.first.character;
     otherCharacter.inventory!.give(character.inventory!);

@@ -15,7 +15,7 @@ class LocationActionsView extends StatelessWidget {
     return Consumer<GameProvider>(builder: (context, game, child) {
       return Container(
         padding: const EdgeInsets.all(8.0),
-        height: 80,
+        height: 90,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

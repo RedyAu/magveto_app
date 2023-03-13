@@ -15,7 +15,6 @@ class ActionsSection extends StatelessWidget {
         children: [
           LocationActionsView(),
           //? Test actions
-
           Wrap(
             children: [
               ElevatedButton(
