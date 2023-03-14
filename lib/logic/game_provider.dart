@@ -60,10 +60,10 @@ class GameProvider extends ChangeNotifier {
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = new Inventory(
-          scripture: 2,
-          prayer: 2,
-          charity: 2,
-          blessing: 2,
+          scripture: 4,
+          prayer: 4,
+          charity: 4,
+          blessing: 4,
         );
         moveCharacterToLocation(character, teamLocation);
       }

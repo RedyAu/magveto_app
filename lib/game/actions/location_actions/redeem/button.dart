@@ -13,20 +13,10 @@ class RedeemButtons extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, game, child) {
         return Row(
-          children: [
-            if (!game.locationInPlay.tiles
-                .firstWhere((element) => element.type == GroundTileType.path)
-                .isRedeemed)
-              Expanded(child: redeemButton(GroundTileType.path, context)),
-            if (!game.locationInPlay.tiles
-                .firstWhere((element) => element.type == GroundTileType.rocky)
-                .isRedeemed)
-              Expanded(child: redeemButton(GroundTileType.rocky, context)),
-            if (!game.locationInPlay.tiles
-                .firstWhere((element) => element.type == GroundTileType.thorny)
-                .isRedeemed)
-              Expanded(child: redeemButton(GroundTileType.thorny, context)),
-          ],
+          children: game.locationInPlay.tiles
+              .where((element) => !element.isRedeemed)
+              .map((e) => Expanded(child: redeemButton(e.type, context)))
+              .toList(),
         );
       },
     );

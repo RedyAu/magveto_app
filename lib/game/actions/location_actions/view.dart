@@ -18,18 +18,18 @@ class LocationActionsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if (game.locationInPlay.type == LocationType.outpost)
-              if (!game.locationInPlay.isAllRedeemed) ...[
+              if (!game.locationInPlay.isAllRedeemed)
                 Expanded(child: RedeemButtons())
-              ] else ...[
+              else
                 Expanded(child: UpgradeLocationButton())
-              ]
             else if (game.locationInPlay.type == LocationType.community) ...[
-              Expanded(child: StartServiceButton()),
-              if (game.locationInPlay.isServicesReady)
+              if (!game.locationInPlay.isServicesReady)
+                Expanded(child: StartServiceButton())
+              else
                 Expanded(child: UpgradeLocationButton()),
               RimButton()
             ] else if (game.locationInPlay.type == LocationType.church) ...[
-              Expanded(child: StartServiceButton()),
+              Expanded(child: Text("New location")),
               RimButton()
             ],
           ],

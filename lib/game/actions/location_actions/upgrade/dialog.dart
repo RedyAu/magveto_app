@@ -34,7 +34,9 @@ class UpgradeLocationDialog extends StatelessWidget {
                 ? "Három föld váltságot nyert, megalapíthatod a gyülekezetet!"
                 : "A gyülekezetedben elindultak a szolgálatok, felépítheted a templomot!"),
             ActionSegmentTitle(
-              "Már csak egy áldáscsillagot kell beadnod.",
+              game.characterInPlay.currentLocation!.type == LocationType.outpost
+                  ? "Már csak egy áldáscsillagot kell beadnod."
+                  : "A szolgálatokat és egy áldáscsillagot kell beadnod.",
               subtitle: true,
             ),
             SizedBox(height: 20),
@@ -50,12 +52,16 @@ class UpgradeLocationDialog extends StatelessWidget {
                   ? () {
                       game.characterInPlay.inventory!
                           .take(Inventory(blessing: 1));
-                      game.characterInPlay.currentLocation!.type ==
-                              LocationType.outpost
-                          ? game.characterInPlay.currentLocation!.type =
-                              LocationType.community
-                          : game.characterInPlay.currentLocation!.type =
-                              LocationType.church;
+                      if (game.locationInPlay.type == LocationType.outpost) {
+                        game.locationInPlay.type = LocationType.community;
+                      } else {
+                        game.locationInPlay.type = LocationType.church;
+                        // TODO character trait
+                        // TODO only take necessary amount in total
+                        game.locationInPlay.scriptureService = 0;
+                        game.locationInPlay.prayerService = 0;
+                        game.locationInPlay.charityService = 0;
+                      }
                       game.notify();
                       Navigator.pop(context);
                     }
