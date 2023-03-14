@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' show BuildContext, ChangeNotifier;
 import 'package:provider/provider.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'index.dart';
 
@@ -34,6 +35,21 @@ class GameProvider extends ChangeNotifier {
   int _round = 1;
   int get round => _round;
 
+  AutoScrollController? locationsController;
+
+  List<Function> postCharacterCallbacks = [
+    () => print("### Post character callbacks"),
+  ];
+  List<Function> postTeamCallbacks = [
+    () => print("### Post team callbacks"),
+  ];
+  List<Function> postDiceCallbacks = [
+    () => print("### Post dice callbacks"),
+  ];
+  List<Function> postRoundCallbacks = [
+    () => print("### Post round callbacks"),
+  ];
+
   void notify() {
     notifyListeners();
   }
@@ -46,8 +62,11 @@ class GameProvider extends ChangeNotifier {
       if (_teamInPlay >= _teams.length) {
         _teamInPlay = 0;
         _round++;
+        postRoundCallbacks.forEach((e) => e());
       }
+      postTeamCallbacks.forEach((e) => e());
     }
+    postCharacterCallbacks.forEach((e) => e());
     notifyListeners();
   }
 
@@ -60,10 +79,10 @@ class GameProvider extends ChangeNotifier {
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = new Inventory(
-          scripture: 4,
-          prayer: 4,
-          charity: 4,
-          blessing: 4,
+          scripture: 10,
+          prayer: 10,
+          charity: 10,
+          blessing: 10,
         );
         moveCharacterToLocation(character, teamLocation);
       }

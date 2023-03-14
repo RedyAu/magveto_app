@@ -24,7 +24,9 @@ class LocationView extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               color: Theme.of(context).colorScheme.primaryContainer),
           padding: EdgeInsets.all(3),
-          margin: EdgeInsets.all(8),
+          margin: type == LocationViewType.current
+              ? EdgeInsets.all(8)
+              : EdgeInsets.only(top: 8, right: 8),
           child: Flex(
             direction: type == LocationViewType.current
                 ? Axis.horizontal
@@ -33,7 +35,7 @@ class LocationView extends StatelessWidget {
             children: [
               Padding(
                 padding: type == LocationViewType.current
-                    ? const EdgeInsets.only(right: 8, left: 8)
+                    ? const EdgeInsets.only(left: 8)
                     : const EdgeInsets.only(top: 8),
                 child: Flex(
                   direction: type == LocationViewType.current
@@ -42,16 +44,10 @@ class LocationView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: team.characters
                       .where((c) => c.currentLocation == location)
-                      .map((c) => Padding(
-                            padding: type == LocationViewType.current
-                                ? const EdgeInsets.only(bottom: 8)
-                                : const EdgeInsets.only(right: 0),
-                            child: SizedBox(
-                              width: type == LocationViewType.current ? 50 : 30,
-                              height:
-                                  type == LocationViewType.current ? 50 : 30,
-                              child: team.idWidgetFor(c),
-                            ),
+                      .map((c) => SizedBox(
+                            width: type == LocationViewType.current ? 50 : 30,
+                            height: type == LocationViewType.current ? 50 : 30,
+                            child: team.idWidgetFor(c),
                           ))
                       .toList(),
                 ),

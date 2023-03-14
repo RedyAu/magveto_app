@@ -31,7 +31,7 @@ class GameScreen extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                  child: LocationSection(),
+                  child: LocationSection(context: context),
                 ),
               ],
             )),
