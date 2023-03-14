@@ -18,6 +18,7 @@ class LocationGroundTilesView extends StatelessWidget {
       required this.teamColor,
       Key? key})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     int i = 0;
@@ -41,7 +42,7 @@ class LocationGroundTilesView extends StatelessWidget {
                               (offset * sin(pi * 2 / 3 * i + pi / 6))),
                           child: GroundTileWidget(tile,
                               key: Key(
-                                  '${location.hashCode} ${tile.hashCode}'))));
+                                  '${location.hashCode} ${tile.hashCode} ${key.hashCode}'))));
                 }),
                 ...List<Widget>.generate(characterCount, (index) {
                   return Transform.translate(
