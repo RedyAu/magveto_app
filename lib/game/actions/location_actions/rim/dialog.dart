@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/ground_tile.dart';
-import 'package:magveto_app/logic/index.dart';
 
+import '../../../../graphics/ground_tile.dart';
+import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
 
 class RimDialog extends StatefulWidget {
@@ -88,7 +88,7 @@ class _RimDialogState extends State<RimDialog> {
                     children: [
                       Spacer(flex: 2),
                       ActionSegmentTitle(
-                          "Egy ${selectedTileType.displayName}mező megváltásához be kell adnod:"),
+                          "${selectedTileType.displayName}mező megváltásához szükséges:"),
                       Spacer(flex: 1),
                       Wrap(
                         children: game.characterInPlay.inventory!
@@ -109,7 +109,7 @@ class _RimDialogState extends State<RimDialog> {
                                 : "Nem tudsz beadni mindent!"),
                         subtitle: true,
                       ),
-                      Spacer(flex: 2),
+                      Spacer(flex: 3),
                       FilledButton(
                           onPressed: game.characterInPlay.inventory!
                                       .getTakeWithBlessing(
@@ -129,7 +129,7 @@ class _RimDialogState extends State<RimDialog> {
                               : null,
                           child: Text("Megváltom!",
                               style: TextStyle(fontSize: 20))),
-                      Spacer(flex: 1),
+                      Spacer(flex: 2),
                     ],
                   ),
           ),

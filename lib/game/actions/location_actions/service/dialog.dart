@@ -1,8 +1,8 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/index.dart';
-import 'package:magveto_app/logic/index.dart';
 
+import '../../../../graphics/index.dart';
+import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
 
 class ServicesDialog extends StatefulWidget {

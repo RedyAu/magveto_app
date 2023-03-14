@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/index.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
