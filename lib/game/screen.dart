@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/roads/section.dart';
-import 'package:magveto_app/graphics/background.dart';
 
+import '../graphics/background.dart';
+import '../logic/roll.dart';
 import 'actions/section.dart';
 import 'inventory/section.dart';
-import '../logic/roll.dart';
 import 'location/section.dart';
+import 'roads/section.dart';
 import 'round/section.dart';
 
 class GameScreen extends StatelessWidget {

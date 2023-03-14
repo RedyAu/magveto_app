@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/logic/index.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../graphics/index.dart';
+import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
 
 class FinishRoadTab extends StatelessWidget {

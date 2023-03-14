@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/actions/location_actions/redeem/dialog.dart';
-import 'package:magveto_app/game/actions/location_actions/service/dialog.dart';
-import 'package:magveto_app/logic/index.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
+import 'dialog.dart';
 
 class RedeemButtons extends StatelessWidget {
   const RedeemButtons({Key? key}) : super(key: key);

@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/item.dart';
+
 import '../logic/inventory.dart';
+import 'item.dart';
 
 class InventorySlotWidget extends StatelessWidget {
   final ItemType type;

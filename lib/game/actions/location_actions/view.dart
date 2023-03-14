@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/game/actions/location_actions/redeem/button.dart';
-import 'package:magveto_app/game/actions/location_actions/rim/button.dart';
-import 'package:magveto_app/game/actions/location_actions/service/button.dart';
-import 'package:magveto_app/game/actions/location_actions/upgrade/button.dart';
-import 'package:magveto_app/game/actions/location_actions/upgrade/dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../../logic/index.dart';
+import 'redeem/button.dart';
+import 'rim/button.dart';
+import 'service/button.dart';
+import 'upgrade/button.dart';
 
 class LocationActionsView extends StatelessWidget {
   @override

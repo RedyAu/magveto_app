@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/inventory_slot.dart';
 
+import '../../graphics/inventory_slot.dart';
 import '../../logic/index.dart';
 import 'ground_tiles_view.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
-import 'package:magveto_app/logic/game_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../logic/game_provider.dart';
 import '../../logic/index.dart';
 import 'indicator.dart';
 

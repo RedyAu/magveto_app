@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/action_dialog.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../logic/index.dart';
+import '../../../action_dialog.dart';
 
 class UpgradeLocationDialog extends StatefulWidget {
   const UpgradeLocationDialog(BuildContext context, {Key? key})
@@ -12,10 +15,14 @@ class UpgradeLocationDialog extends StatefulWidget {
 class _UpgradeLocationDialogState extends State<UpgradeLocationDialog> {
   @override
   Widget build(BuildContext context) {
-    return ActionDialog(
-        heroTag: "upgrade",
-        title: "Fejlesztés",
-        icon: Icon(Icons.upgrade),
-        child: Center(child: Text("UpgradeLocationDialog")));
+    return Consumer<GameProvider>(
+      builder: (context, game, child) {
+        return ActionDialog(
+            heroTag: "upgrade",
+            title: "Fejlesztés",
+            icon: Icon(Icons.upgrade),
+            child: Center(child: Text("UpgradeLocationDialog")));
+      }
+    );
   }
 }

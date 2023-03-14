@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/road_count.dart';
 
+import '../../graphics/road_count.dart';
 import '../../logic/index.dart';
 
 class RoadTileWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/actions/location_actions/service/dialog.dart';
 
 import '../../../action_dialog.dart';
+import 'dialog.dart';
 
 class StartServiceButton extends StatelessWidget {
   const StartServiceButton({Key? key}) : super(key: key);

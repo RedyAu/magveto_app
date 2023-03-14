@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/actions/location_actions/view.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
-import '../roads/section.dart';
+import 'location_actions/view.dart';
 
 class ActionsSection extends StatelessWidget {
   const ActionsSection({super.key});

@@ -2,9 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'inventory.dart';
-import 'team.dart';
-
 enum Roll { scripture, prayer, charity, blessing, choose, eventCard }
 
 extension RollUtils on Roll {

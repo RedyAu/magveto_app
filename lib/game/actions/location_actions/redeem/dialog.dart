@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/logic/index.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../logic/index.dart';
+import '../../../action_dialog.dart';
 
 class RedeemDialog extends StatefulWidget {
   final GroundTileType type;
@@ -50,10 +51,12 @@ class _RedeemDialogState extends State<RedeemDialog> {
             SizedBox(height: 20),
             FilledButton(
                 onPressed: game.characterInPlay.inventory!
-                        .canTake(widget.type.giveToRedeem)
+                            .getTakeWithBlessing(widget.type.giveToRedeem) !=
+                        null
                     ? () {
-                        game.characterInPlay.inventory!
-                            .take(widget.type.giveToRedeem);
+                        game.characterInPlay.inventory!.take(game
+                            .characterInPlay.inventory!
+                            .getTakeWithBlessing(widget.type.giveToRedeem)!);
                         game.locationInPlay.tiles
                             .firstWhere(
                                 (element) => element.type == widget.type)

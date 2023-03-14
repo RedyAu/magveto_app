@@ -12,23 +12,27 @@ class UpgradeLocationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Hero(
       tag: "upgrade",
-      child: FilledButton(
-        onPressed: () => Navigator.push(
-          context,
-          ActionRoute(
-            builder: (context) => UpgradeLocationDialog(context),
+      child: Consumer<GameProvider>(builder: (context, game, child) {
+        return FilledButton.icon(
+          onPressed: () => Navigator.push(
+            context,
+            ActionRoute(
+              builder: (context) => UpgradeLocationDialog(context),
+            ),
           ),
-        ),
-        child: Consumer<GameProvider>(builder: (context, game, child) {
-          return Padding(
+          label: Text(
+              game.characterInPlay.currentLocation!.type == LocationType.outpost
+                  ? "Gyülekezetplántálás"
+                  : "Templomépítés"),
+          icon: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(game.characterInPlay.currentLocation!.type ==
                     LocationType.outpost
                 ? "assets/button/outpost/${game.teamInPlay.id}.png"
                 : "assets/button/community/${game.teamInPlay.id}.png"),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/background.dart';
+
+import '../graphics/background.dart';
 
 class ActionDialog extends StatelessWidget {
   final String heroTag;

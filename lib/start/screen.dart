@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/background.dart';
 import 'package:provider/provider.dart';
 
 import '../game/screen.dart';
+import '../graphics/background.dart';
 import '../logic/index.dart';
 
 class NewScreen extends StatefulWidget {

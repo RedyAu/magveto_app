@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/logic/index.dart';
+
+import '../logic/index.dart';
 
 class ItemWidget extends StatelessWidget {
   final ItemType type;

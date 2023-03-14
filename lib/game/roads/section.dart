@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/game/roads/road_tile.dart';
-import 'package:magveto_app/game/roads/dialog/dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
+import '../action_dialog.dart';
+import 'dialog/dialog.dart';
+import 'road_tile.dart';
 
 class RoadsSection extends StatelessWidget {
   const RoadsSection({Key? key}) : super(key: key);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/graphics/index.dart';
+
+import '../graphics/index.dart';
 
 class Inventory {
   /// Ige
@@ -144,8 +145,6 @@ class Inventory {
 
     for (var otherItem in otherItems.entries) {
       for (var i = 0; i < otherItem.value; i++) {
-        bool notEnoughOfThis = false;
-
         if (thisItems[otherItem.key]! < 1) {
           // Not enough to cover
           if (otherItem.key != ItemType.blessing &&
@@ -156,22 +155,20 @@ class Inventory {
             thisItems[ItemType.blessing] = thisItems[ItemType.blessing]! - 1;
           } else {
             // Can't use blessing instead
-            notEnoughOfThis = true;
+            return null;
           }
         } else {
           // There is enough of this to cover
           thisItems[otherItem.key] = thisItems[otherItem.key]! - 1;
         }
-
-        if (notEnoughOfThis) return null;
       }
     }
 
     return Inventory(
-      scripture: other.scripture - thisItems[ItemType.scripture]!,
-      prayer: other.prayer - thisItems[ItemType.prayer]!,
-      charity: other.charity - thisItems[ItemType.charity]!,
-      blessing: other.blessing - thisItems[ItemType.blessing]!,
+      scripture: scripture - thisItems[ItemType.scripture]!,
+      prayer: prayer - thisItems[ItemType.prayer]!,
+      charity: charity - thisItems[ItemType.charity]!,
+      blessing: blessing - thisItems[ItemType.blessing]!,
     );
   }
 
