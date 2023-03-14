@@ -54,11 +54,33 @@ class UpgradeLocationDialog extends StatelessWidget {
                         game.locationInPlay.type = LocationType.community;
                       } else {
                         game.locationInPlay.type = LocationType.church;
+
                         // TODO character trait
-                        // TODO only take necessary amount in total
-                        game.locationInPlay.scriptureService = 0;
-                        game.locationInPlay.prayerService = 0;
-                        game.locationInPlay.charityService = 0;
+                        int amountToTake = 3;
+                        for (var i = 0;
+                            i < 2 &&
+                                game.locationInPlay.scriptureService > 0 &&
+                                amountToTake > 0;
+                            i++) {
+                          game.locationInPlay.scriptureService--;
+                          amountToTake--;
+                        }
+                        for (var i = 0;
+                            i < 2 &&
+                                game.locationInPlay.prayerService > 0 &&
+                                amountToTake > 0;
+                            i++) {
+                          game.locationInPlay.prayerService--;
+                          amountToTake--;
+                        }
+                        for (var i = 0;
+                            i < 2 &&
+                                game.locationInPlay.charityService > 0 &&
+                                amountToTake > 0;
+                            i++) {
+                          game.locationInPlay.charityService--;
+                          amountToTake--;
+                        }
                       }
                       game.notify();
                       Navigator.pop(context);
