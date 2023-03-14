@@ -24,7 +24,7 @@ class StartServiceButton extends StatelessWidget {
               filterQuality: FilterQuality.medium,
             ),
           ),
-          label: Text("Szolgálat indítása")),
+          label: Text("Szolgálat")),
     );
   }
 }

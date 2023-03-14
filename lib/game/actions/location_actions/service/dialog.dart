@@ -96,18 +96,19 @@ class _ServicesDialogState extends State<ServicesDialog> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
             AnimatedContainer(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOutCubicEmphasized,
-              height: _selectedServiceSet.isEmpty ? 0 : 180,
+              height: _selectedServiceSet.isEmpty ? 0 : 230,
               child: _selectedServiceSet.isEmpty
                   ? null
                   : Column(
                       children: [
+                        Spacer(flex: 2),
                         ActionSegmentTitle(
                           "${selectedService.displayName} indításához szükséges:",
                         ),
+                        Spacer(flex: 1),
                         Wrap(
                           children: game.characterInPlay.inventory!
                               .getCompareWithBlessingWidgetList(
@@ -127,36 +128,40 @@ class _ServicesDialogState extends State<ServicesDialog> {
                                   : "Nem tudsz beadni mindent! ❌"),
                           subtitle: true,
                         ),
-                        SizedBox(height: 20),
+                        Spacer(flex: 3),
                         FilledButton(
-                            onPressed: game.characterInPlay.inventory!
-                                        .getTakeWithBlessing(
-                                            selectedService.giveToStart) !=
-                                    null
-                                ? () {
-                                    game.characterInPlay.inventory!.take(game
-                                        .characterInPlay.inventory!
-                                        .getTakeWithBlessing(
-                                            selectedService.giveToStart)!);
+                          onPressed: game.characterInPlay.inventory!
+                                      .getTakeWithBlessing(
+                                          selectedService.giveToStart) !=
+                                  null
+                              ? () {
+                                  game.characterInPlay.inventory!.take(game
+                                      .characterInPlay.inventory!
+                                      .getTakeWithBlessing(
+                                          selectedService.giveToStart)!);
 
-                                    switch (selectedService) {
-                                      case ServiceType.scriptureService:
-                                        game.locationInPlay.scriptureService++;
-                                        break;
-                                      case ServiceType.prayerService:
-                                        game.locationInPlay.prayerService++;
-                                        break;
-                                      case ServiceType.charityService:
-                                        game.locationInPlay.charityService++;
-                                        break;
-                                    }
-
-                                    game.notify();
-                                    Navigator.pop(context);
+                                  switch (selectedService) {
+                                    case ServiceType.scriptureService:
+                                      game.locationInPlay.scriptureService++;
+                                      break;
+                                    case ServiceType.prayerService:
+                                      game.locationInPlay.prayerService++;
+                                      break;
+                                    case ServiceType.charityService:
+                                      game.locationInPlay.charityService++;
+                                      break;
                                   }
-                                : null,
-                            child:
-                                Text("Mehet!", style: TextStyle(fontSize: 20))),
+
+                                  game.notify();
+                                  Navigator.pop(context);
+                                }
+                              : null,
+                          child: Text(
+                            "Mehet!",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        Spacer(flex: 3)
                       ],
                     ),
             ),
