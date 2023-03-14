@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/game/actions/location_actions/rim/dialog.dart';
 
 import '../../../action_dialog.dart';
 import '../service/dialog.dart';
@@ -14,7 +15,7 @@ class RimButton extends StatelessWidget {
         onPressed: () => Navigator.push(
           context,
           ActionRoute(
-            builder: (context) => ServicesDialog(context),
+            builder: (context) => RimDialog(),
           ),
         ),
         child: Padding(

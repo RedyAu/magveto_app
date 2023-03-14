@@ -45,8 +45,8 @@ class _RedeemDialogState extends State<RedeemDialog> {
                   : (game.characterInPlay.inventory!
                               .getTakeWithBlessing(widget.type.giveToRedeem) !=
                           null
-                      ? "Be tudsz adni mindent, de a hitből kell építkezned! 🙏"
-                      : "Nem tudsz beadni mindent! ❌"),
+                      ? "Be tudsz adni mindent, de a hitből kell építkezned!"
+                      : "Nem tudsz beadni mindent!"),
               subtitle: true,
             ),
             SizedBox(height: 20),

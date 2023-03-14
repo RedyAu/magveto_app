@@ -29,11 +29,13 @@ class _RoundSectionState extends State<RoundSection> {
   @override
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(builder: (context, game, child) {
+      // HACK somebody tell me how to use scrollcontrollers properly 😳
       if (_controller.positions.isNotEmpty &&
           game.characterWithTeamInPlay != _controller.selectedItem) {
+        int jumpTo = game.characterWithTeamInPlay - 1;
+        if (jumpTo < 0) jumpTo = game.charactersWithTeams.length - 1;
+        _controller.jumpToItem(jumpTo);
         _controller.nextItem();
-        Future.delayed(const Duration(milliseconds: 500)).then(
-            (value) => _controller.jumpToItem(game.characterWithTeamInPlay));
       }
 
       return Row(
@@ -50,7 +52,6 @@ class _RoundSectionState extends State<RoundSection> {
                       child: InfiniteCarousel.builder(
                         center: true,
                         controller: _controller,
-                        physics: NeverScrollableScrollPhysics(),
                         itemCount: game.charactersWithTeams.length,
                         itemExtent: 80,
                         itemBuilder: (context, itemIndex, realIndex) =>

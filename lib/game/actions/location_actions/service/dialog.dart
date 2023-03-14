@@ -6,7 +6,7 @@ import 'package:magveto_app/logic/index.dart';
 import '../../../action_dialog.dart';
 
 class ServicesDialog extends StatefulWidget {
-  const ServicesDialog(BuildContext context, {Key? key}) : super(key: key);
+  const ServicesDialog({Key? key}) : super(key: key);
 
   @override
   _ServicesDialogState createState() => _ServicesDialogState();
@@ -40,66 +40,60 @@ class _ServicesDialogState extends State<ServicesDialog> {
               subtitle: true,
             ),
             SizedBox(height: 10),
-            SizedBox(
-              height: 70,
-              child: FadingEdgeScrollView.fromSingleChildScrollView(
-                shouldDisposeScrollController: true,
-                child: SingleChildScrollView(
-                  controller: segmentedButtonScrollController,
-                  scrollDirection: Axis.horizontal,
-                  child: SegmentedButton<ServiceType>(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.resolveWith<Color?>(
-                        (states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Theme.of(context)
-                                .colorScheme
-                                .primaryContainer;
-                          }
-                          return Color(0xffa8814c);
-                        },
-                      ),
-                      side: MaterialStatePropertyAll<BorderSide?>(
-                        BorderSide(
-                          color: Colors.amber,
-                        ),
+            FadingEdgeScrollView.fromSingleChildScrollView(
+              shouldDisposeScrollController: true,
+              child: SingleChildScrollView(
+                controller: segmentedButtonScrollController,
+                scrollDirection: Axis.horizontal,
+                child: SegmentedButton<ServiceType>(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                      (states) {
+                        if (states.contains(MaterialState.selected)) {
+                          return Theme.of(context).colorScheme.primaryContainer;
+                        }
+                        return Color(0xffa8814c);
+                      },
+                    ),
+                    side: MaterialStatePropertyAll<BorderSide?>(
+                      BorderSide(
+                        color: Colors.amber,
                       ),
                     ),
-                    showSelectedIcon: false,
-                    emptySelectionAllowed: true,
-                    selected: _selectedServiceSet,
-                    onSelectionChanged: (value) {
-                      setState(() {
-                        _selectedServiceSet = value;
-                      });
-                    },
-                    segments: ServiceType.values
-                        .map(
-                          (e) => ButtonSegment<ServiceType>(
-                            value: e,
-                            label: SizedBox(
-                              height: 70,
-                              width: 70,
-                              child: Padding(
-                                padding: const EdgeInsets.all(3),
-                                child: ItemWidget(
-                                  type: ItemType.values.firstWhere(
-                                      (element) => element.name == e.name),
-                                ),
+                  ),
+                  showSelectedIcon: false,
+                  emptySelectionAllowed: true,
+                  selected: _selectedServiceSet,
+                  onSelectionChanged: (value) {
+                    setState(() {
+                      _selectedServiceSet = value;
+                    });
+                  },
+                  segments: ServiceType.values
+                      .map(
+                        (e) => ButtonSegment<ServiceType>(
+                          value: e,
+                          label: Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: SizedBox(
+                              height: 65,
+                              width: 65,
+                              child: ItemWidget(
+                                type: ItemType.values.firstWhere(
+                                    (element) => element.name == e.name),
                               ),
                             ),
                           ),
-                        )
-                        .toList(),
-                  ),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),
             AnimatedContainer(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOutCubicEmphasized,
-              height: _selectedServiceSet.isEmpty ? 0 : 230,
+              height: _selectedServiceSet.isEmpty ? 10 : 230,
               child: _selectedServiceSet.isEmpty
                   ? null
                   : Column(
@@ -124,8 +118,8 @@ class _ServicesDialogState extends State<ServicesDialog> {
                                           .getTakeWithBlessing(
                                               selectedService.giveToStart) !=
                                       null
-                                  ? "Be tudsz adni mindent, de a hitből kell építkezned! ⭐"
-                                  : "Nem tudsz beadni mindent! ❌"),
+                                  ? "Be tudsz adni mindent, de a hitből kell építkezned!"
+                                  : "Nem tudsz beadni mindent!"),
                           subtitle: true,
                         ),
                         Spacer(flex: 3),
@@ -161,7 +155,7 @@ class _ServicesDialogState extends State<ServicesDialog> {
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
-                        Spacer(flex: 3)
+                        Spacer(flex: 2)
                       ],
                     ),
             ),

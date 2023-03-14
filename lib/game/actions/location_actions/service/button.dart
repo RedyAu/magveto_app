@@ -14,7 +14,7 @@ class StartServiceButton extends StatelessWidget {
           onPressed: () => Navigator.push(
                 context,
                 ActionRoute(
-                  builder: (context) => ServicesDialog(context),
+                  builder: (context) => ServicesDialog(),
                 ),
               ),
           icon: Padding(
