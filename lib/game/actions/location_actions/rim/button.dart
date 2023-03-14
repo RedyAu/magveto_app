@@ -18,8 +18,11 @@ class RimButton extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset("assets/button/rim.png"),
+          padding: const EdgeInsets.all(5),
+          child: Image.asset(
+            "assets/button/rim.png",
+            filterQuality: FilterQuality.medium,
+          ),
         ),
       ),
     );

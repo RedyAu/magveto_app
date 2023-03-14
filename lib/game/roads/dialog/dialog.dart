@@ -127,7 +127,7 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
               height: _selectedConnectionSet.isEmpty ? 15 : 400,
               decoration: null,
               child: _selectedConnectionSet.isEmpty
-                  ? Container()
+                  ? null
                   : Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

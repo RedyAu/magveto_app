@@ -18,8 +18,11 @@ class StartServiceButton extends StatelessWidget {
                 ),
               ),
           icon: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset("assets/button/service.png"),
+            padding: const EdgeInsets.all(5),
+            child: Image.asset(
+              "assets/button/service.png",
+              filterQuality: FilterQuality.medium,
+            ),
           ),
           label: Text("Szolgálat indítása")),
     );

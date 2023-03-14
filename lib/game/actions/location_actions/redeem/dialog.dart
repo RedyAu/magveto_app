@@ -15,12 +15,13 @@ class RedeemDialog extends StatefulWidget {
 class _RedeemDialogState extends State<RedeemDialog> {
   @override
   Widget build(BuildContext context) {
+    GameProvider game = GameProvider.of(context);
+
     return ActionDialog(
-      heroTag: "redeem_${widget.type.name}",
-      title: "${widget.type.displayName}mező megváltása",
-      icon: Icon(Icons.stream_sharp),
-      child: Consumer<GameProvider>(builder: (context, game, child) {
-        return Column(
+        heroTag: "redeem_${widget.type.name}",
+        title: "${widget.type.displayName}mező megváltása",
+        icon: Icon(Icons.stream_sharp),
+        child: Column(
           children: [
             Image.asset(
               "assets/button/redeem_${widget.type.name}.png",
@@ -68,8 +69,6 @@ class _RedeemDialogState extends State<RedeemDialog> {
                 child: Text("Megváltom!", style: TextStyle(fontSize: 20))),
             SizedBox(height: 10),
           ],
-        );
-      }),
-    );
+        ));
   }
 }
