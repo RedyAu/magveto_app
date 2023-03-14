@@ -65,9 +65,7 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
 
   @override
   void dispose() {
-    segmentedButtonScrollController.dispose();
     tabController.dispose();
-
     super.dispose();
   }
 
