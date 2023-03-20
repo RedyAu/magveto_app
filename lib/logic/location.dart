@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'index.dart';
 
 enum LocationType {
@@ -90,7 +92,11 @@ class Location {
     GroundTile(GroundTileType.thorny),
   ];
 
+  static List<Location> locations = [];
+
   bool get isAllRedeemed => tiles.every((element) => element.isRedeemed);
+
+  GlobalKey key = GlobalKey();
 
   /// Bibliaiskola
   int scriptureService = 0;
@@ -101,6 +107,8 @@ class Location {
   /// Diakóniai szolgálat
   int charityService = 0;
 
+  int get index => locations.indexOf(this);
+
   List<int> get servicesAsIntList =>
       [scriptureService, prayerService, charityService];
 
@@ -110,4 +118,10 @@ class Location {
       servicesAsIntList.reduce((value, element) => value + element) >= 3;
 
   Location(this.team);
+
+  factory Location.create(Team team) {
+    var location = new Location(team);
+    locations.add(location);
+    return location;
+  }
 }
