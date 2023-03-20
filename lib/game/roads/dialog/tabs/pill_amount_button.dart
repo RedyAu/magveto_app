@@ -17,8 +17,8 @@ class PillAmountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToggleButtons(
       constraints: BoxConstraints(
-        minWidth: 30,
-        minHeight: 30,
+        minWidth: 35,
+        minHeight: 35,
       ),
       // set selected if action is available
       isSelected: [
@@ -44,7 +44,9 @@ class PillAmountButton extends StatelessWidget {
               : itemsToUse[itemTypeIndex];
         } else {
           itemsToUse[itemTypeIndex]--;
-          itemsToUse[itemTypeIndex] < 0 ? itemsToUse[itemTypeIndex] = 0 : itemsToUse[itemTypeIndex];
+          itemsToUse[itemTypeIndex] < 0
+              ? itemsToUse[itemTypeIndex] = 0
+              : itemsToUse[itemTypeIndex];
         }
         resolveItemsToUse();
       },

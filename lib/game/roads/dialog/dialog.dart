@@ -124,7 +124,7 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
             AnimatedContainer(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOutCubicEmphasized,
-              height: _selectedConnectionSet.isEmpty ? 15 : 400,
+              height: _selectedConnectionSet.isEmpty ? 15 : 430,
               decoration: null,
               child: _selectedConnectionSet.isEmpty
                   ? null
@@ -139,7 +139,7 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
                           ],
                         ),
                         Container(
-                          height: 350,
+                          height: 380,
                           child: TabBarView(
                             controller: tabController,
                             physics: BouncingScrollPhysics(
