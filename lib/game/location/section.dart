@@ -1,18 +1,34 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../graphics/index.dart';
 import '../../logic/index.dart';
 import 'view.dart';
 
-class LocationSection extends StatelessWidget {
+class LocationSection extends StatefulWidget {
   final BuildContext context;
   LocationSection({required BuildContext this.context, Key? key})
       : super(key: key);
 
-  final ScrollController otherLocationsScrollController = ScrollController();
+  @override
+  State<LocationSection> createState() => _LocationSectionState();
+}
+
+class _LocationSectionState extends State<LocationSection> {
+  late ScrollController otherLocationsScrollController;
+
+  @override
+  void initState() {
+    otherLocationsScrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    otherLocationsScrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,36 +68,39 @@ class LocationSection extends StatelessWidget {
           ),
           SizedBox(
             width: 100,
-            child: FadingEdgeScrollView.fromScrollView(
-              shouldDisposeScrollController: true,
-              child: ListView(
+            child: FadingEdgeScrollView.fromSingleChildScrollView(
+              child: SingleChildScrollView(
                 controller: otherLocationsScrollController,
-                children: Location.locations.map((e) {
-                  return AnimatedSize(
-                    key: e.key,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCubicEmphasized,
-                    //height: game.locationInPlay == e ? 14 : 140,
-                    child: LocationView(
-                      e,
-                      game.locationInPlay == e
-                          ? LocationViewType.currentOther
-                          : LocationViewType.other,
-                      key: Key('${e.hashCode}'),
-                    ),
-                  );
-                }).toList(),
+                child: Column(
+                  children: Location.locations.map((e) {
+                    return AnimatedSize(
+                      key: e.key,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOutCubicEmphasized,
+                      //height: game.locationInPlay == e ? 14 : 140,
+                      child: LocationView(
+                        e,
+                        game.locationInPlay == e
+                            ? LocationViewType.currentOther
+                            : LocationViewType.other,
+                        key: Key('${e.hashCode}'),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ),
         ],
       );
 
+      // TODO call this from a less hacky place
       Future.delayed(Duration(milliseconds: 500))
           .then((value) => Scrollable.ensureVisible(
                 game.locationInPlay.key.currentContext!,
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeInOutCubicEmphasized,
+                alignment: 0.5,
               ));
 
       return rowWidget;
