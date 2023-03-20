@@ -91,10 +91,10 @@ class _BuildRoadTabState extends State<BuildRoadTab>
             children: List<Widget>.generate(
               4,
               (index) => PillAmountButton(
-                  itemsToUse: itemsToUse,
-                  playerInventory: game.characterInPlay.inventory!.asIntList,
+                  itemListTo: itemsToUse,
+                  itemListFrom: game.characterInPlay.inventory!.asIntList,
                   itemTypeIndex: index,
-                  resolveItemsToUse: resolveItemsToUse),
+                  onPressed: resolveItemsToUse),
             ),
           ),
           Divider(height: 25),

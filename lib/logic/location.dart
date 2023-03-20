@@ -122,6 +122,20 @@ class Location {
   factory Location.create(Team team) {
     var location = new Location(team);
     locations.add(location);
+    // sort by character id (get first character with location)
+    try {
+      locations.sort((a, b) {
+        if (a.team != b.team) return 0;
+        return a.team.characters
+            .firstWhere((element) => element.currentLocation == a)
+            .letter
+            .compareTo(b.team.characters
+                .firstWhere((element) => element.currentLocation == b)
+                .letter);
+      });
+    } catch (_) {}
+
+    locations.sort((a, b) => a.team.id.compareTo(b.team.id));
     return location;
   }
 }

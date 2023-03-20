@@ -75,7 +75,7 @@ class GameProvider extends ChangeNotifier {
     // init all inventories
     // instantiate a location for each team, and give that location to each member of the team
     for (var team in _teams) {
-      Location teamLocation = new Location(team);
+      Location teamLocation = Location.create(team);
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = new Inventory(

@@ -32,6 +32,7 @@ class LocationActionsView extends StatelessWidget {
             ] else if (game.locationInPlay.type == LocationType.church) ...[
               Expanded(child: NewLocationButton()),
               // TODO Optional choosable final event for church type!
+              // TODO Possibility to relocate character to already existing location?
               RimButton()
             ],
           ],

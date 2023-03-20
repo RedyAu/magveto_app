@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/game/actions/location_actions/new/inventory-split_dialog.dart';
 import 'package:magveto_app/game/location/ground_tiles_view.dart';
 import 'package:magveto_app/graphics/drag_card.dart';
 
@@ -262,14 +263,56 @@ Most eldönthetitek, hogy a csapat mindkét misszionáriusa az új állomásra k
             subtitle: true,
           ),
           SizedBox(height: 10),
-          FilledButton(
-              onPressed: _charactersToMove.isNotEmpty // TODO more checks
-                  ? () {
-                      // TODO
-                    }
-                  : null,
-              child: Text(_charactersToMove.length == 1 ? "Tovább" : "Mehet!",
-                  style: TextStyle(fontSize: 20))),
+          Hero(
+            tag: "inventory_split",
+            child: FilledButton(
+                onPressed: _charactersToMove.isNotEmpty &&
+                        game.characterInPlay.inventory!
+                                .getTakeWithBlessing(_neededForNew) !=
+                            null
+                    ? () {
+                        bool differentNumber = _charactersToMove.length !=
+                            game.characters
+                                .where((element) =>
+                                    element.currentLocation ==
+                                    game.locationInPlay)
+                                .length;
+                        Location newLocation = Location.create(game.teamInPlay)
+                          ..tiles = tileTypeSettings
+                              .map((e) => e.toGroundTile)
+                              .toList();
+                        _charactersToMove.forEach((element) {
+                          element.character.currentLocation = newLocation;
+                        });
+
+                        game.characterInPlay.inventory!.take(game
+                            .characterInPlay.inventory!
+                            .getTakeWithBlessing(_neededForNew)!);
+
+                        if (differentNumber) {
+                          // Split inventories
+                          Navigator.pushReplacement(
+                              context,
+                              ActionRoute(
+                                  builder: (_) => InventorySplitDialog()));
+                        } else {
+                          Navigator.pop(context);
+                        }
+
+                        game.notify();
+                      }
+                    : null,
+                child: Text(
+                    (_charactersToMove.length !=
+                            game.characters
+                                .where((element) =>
+                                    element.currentLocation ==
+                                    game.locationInPlay)
+                                .length)
+                        ? "Tovább"
+                        : "Mehet!",
+                    style: TextStyle(fontSize: 20))),
+          ),
           SizedBox(height: 10),
         ],
       ),

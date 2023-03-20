@@ -31,25 +31,25 @@ class LocationView extends StatelessWidget {
                   : Axis.vertical,
               //crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: type == LocationViewType.current
-                      ? const EdgeInsets.only(left: 8)
-                      : const EdgeInsets.only(top: 8),
-                  child: Flex(
-                    direction: type == LocationViewType.current
-                        ? Axis.vertical
-                        : Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: location.team.characters
-                        .where((c) => c.currentLocation == location)
-                        .map((c) => SizedBox(
+                Flex(
+                  direction: type == LocationViewType.current
+                      ? Axis.vertical
+                      : Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: location.team.characters
+                      .where((c) => c.currentLocation == location)
+                      .map((c) => Padding(
+                            padding: type == LocationViewType.current
+                                ? const EdgeInsets.only(left: 8)
+                                : const EdgeInsets.only(top: 8),
+                            child: SizedBox(
                               width: type == LocationViewType.current ? 50 : 30,
                               height:
                                   type == LocationViewType.current ? 50 : 30,
                               child: location.team.idWidgetFor(c),
-                            ))
-                        .toList(),
-                  ),
+                            ),
+                          ))
+                      .toList(),
                 ),
                 if (type == LocationViewType.current)
                   Expanded(child: groundTilesView())

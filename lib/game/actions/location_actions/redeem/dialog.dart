@@ -50,6 +50,7 @@ class _RedeemDialogState extends State<RedeemDialog> {
             ),
             SizedBox(height: 20),
             FilledButton(
+                // TODO same tile gets redeemed as the one that was clicked on (when multiple tiles of same type)! (also hero doesn't work)
                 onPressed: game.characterInPlay.inventory!
                             .getTakeWithBlessing(widget.type.giveToRedeem) !=
                         null

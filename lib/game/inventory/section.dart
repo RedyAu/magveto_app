@@ -5,32 +5,25 @@ import '../../graphics/inventory_slot.dart';
 import '../../logic/index.dart';
 
 class InventorySection extends StatelessWidget {
-  const InventorySection({super.key});
+  final Inventory inventory;
+  const InventorySection(Inventory this.inventory, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GameProvider>(builder: (context, game, child) {
-      return Container(
-        height: 88,
-        padding: EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            InventorySlotWidget(
-                type: ItemType.scripture,
-                count: game.characterInPlay.inventory!.scripture),
-            InventorySlotWidget(
-                type: ItemType.prayer,
-                count: game.characterInPlay.inventory!.prayer),
-            InventorySlotWidget(
-                type: ItemType.charity,
-                count: game.characterInPlay.inventory!.charity),
-            InventorySlotWidget(
-                type: ItemType.blessing,
-                count: game.characterInPlay.inventory!.blessing),
-          ],
-        ),
-      );
-    });
+    return Container(
+      height: 88,
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InventorySlotWidget(
+              type: ItemType.scripture, count: inventory.scripture),
+          InventorySlotWidget(type: ItemType.prayer, count: inventory.prayer),
+          InventorySlotWidget(type: ItemType.charity, count: inventory.charity),
+          InventorySlotWidget(
+              type: ItemType.blessing, count: inventory.blessing),
+        ],
+      ),
+    );
   }
 }

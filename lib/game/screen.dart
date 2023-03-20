@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/logic/game_provider.dart';
 
 import '../graphics/background.dart';
 import '../logic/roll.dart';
@@ -39,7 +40,9 @@ class GameScreen extends StatelessWidget {
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                InventorySection(),
+                InventorySection(GameProvider.of(context, listen: true)
+                    .characterInPlay
+                    .inventory!),
                 RoadsSection(),
                 ActionsSection(),
               ],

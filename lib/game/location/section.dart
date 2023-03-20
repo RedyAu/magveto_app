@@ -71,22 +71,25 @@ class _LocationSectionState extends State<LocationSection> {
             child: FadingEdgeScrollView.fromSingleChildScrollView(
               child: SingleChildScrollView(
                 controller: otherLocationsScrollController,
-                child: Column(
-                  children: Location.locations.map((e) {
-                    return AnimatedSize(
-                      key: e.key,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOutCubicEmphasized,
-                      //height: game.locationInPlay == e ? 14 : 140,
-                      child: LocationView(
-                        e,
-                        game.locationInPlay == e
-                            ? LocationViewType.currentOther
-                            : LocationViewType.other,
-                        key: Key('${e.hashCode}'),
-                      ),
-                    );
-                  }).toList(),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Column(
+                    children: Location.locations.map((e) {
+                      return AnimatedSize(
+                        key: e.key,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOutCubicEmphasized,
+                        //height: game.locationInPlay == e ? 14 : 140,
+                        child: LocationView(
+                          e,
+                          game.locationInPlay == e
+                              ? LocationViewType.currentOther
+                              : LocationViewType.other,
+                          key: Key('${e.hashCode}'),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ),

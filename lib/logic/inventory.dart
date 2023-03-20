@@ -25,6 +25,15 @@ class Inventory {
     this.blessing = 0,
   });
 
+  factory Inventory.fromIntList(List<int> list) {
+    return Inventory(
+      scripture: list[0],
+      prayer: list[1],
+      charity: list[2],
+      blessing: list[3],
+    );
+  }
+
   List<int> get asIntList => [scripture, prayer, charity, blessing];
   // return an ItemWidget for each item of each type of item
   List<Widget> get asWidgetList => [

@@ -7,12 +7,14 @@ class ActionDialog extends StatelessWidget {
   final String title;
   final Widget? icon;
   final Widget child;
+  final bool showCloseButton;
 
   const ActionDialog({
     required this.child,
     required this.heroTag,
     required this.title,
     this.icon,
+    this.showCloseButton = true,
     Key? key,
   }) : super(key: key);
 
@@ -36,10 +38,13 @@ class ActionDialog extends StatelessWidget {
                   child: ListTile(
                     leading: icon,
                     title: Text(title),
-                    trailing: IconButton(
+                    trailing: showCloseButton
+                        ?
+                     IconButton(
                       icon: Icon(Icons.close),
                       onPressed: () => Navigator.of(context).pop(),
-                    ),
+                    )
+                        : null,
                   ),
                 ),
               ),
@@ -78,9 +83,6 @@ class ActionRoute<T> extends PageRoute<T> {
 
   @override
   bool get opaque => false;
-
-  @override
-  bool get barrierDismissible => true;
 
   @override
   String? get barrierLabel => "action";

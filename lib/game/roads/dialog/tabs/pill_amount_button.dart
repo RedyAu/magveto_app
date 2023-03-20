@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class PillAmountButton extends StatelessWidget {
-  final List<int> itemsToUse;
-  final List<int> playerInventory;
+  final List<int> itemListTo;
+  final List<int> itemListFrom;
   final int itemTypeIndex;
-  final Function resolveItemsToUse;
+  final Function onPressed;
+  final bool takeItemsFrom;
 
   const PillAmountButton({
-    required this.itemsToUse,
-    required this.playerInventory,
+    required this.itemListTo,
+    required this.itemListFrom,
     required this.itemTypeIndex,
-    required this.resolveItemsToUse,
+    this.takeItemsFrom = false,
+    required this.onPressed,
   });
 
   @override
@@ -22,13 +24,23 @@ class PillAmountButton extends StatelessWidget {
       ),
       // set selected if action is available
       isSelected: [
-        itemsToUse[itemTypeIndex] < playerInventory[itemTypeIndex],
-        itemsToUse[itemTypeIndex] > 0,
+        if (takeItemsFrom) ...[
+          itemListFrom[itemTypeIndex] > 0,
+          itemListTo[itemTypeIndex] > 0
+        ] else ...[
+          itemListTo[itemTypeIndex] < itemListFrom[itemTypeIndex],
+          itemListTo[itemTypeIndex] > 0,
+        ],
       ],
       direction: Axis.vertical,
       children: [
-        Icon(size: 15, Icons.add),
-        Icon(size: 15, Icons.remove),
+        if (takeItemsFrom) ...[
+          Icon(size: 15, Icons.arrow_upward_rounded),
+          Icon(size: 15, Icons.arrow_downward_rounded),
+        ] else ...[
+          Icon(size: 15, Icons.add),
+          Icon(size: 15, Icons.remove),
+        ],
       ],
       borderRadius: BorderRadius.circular(99),
       color: Colors.white60,
@@ -37,18 +49,34 @@ class PillAmountButton extends StatelessWidget {
       borderColor: Colors.white38,
       selectedBorderColor: Colors.amber,
       onPressed: (index) {
-        if (index == 0) {
-          itemsToUse[itemTypeIndex]++;
-          itemsToUse[itemTypeIndex] > playerInventory[itemTypeIndex]
-              ? itemsToUse[itemTypeIndex] = playerInventory[itemTypeIndex]
-              : itemsToUse[itemTypeIndex];
+        if (takeItemsFrom) {
+          switch (index) {
+            case 0:
+              if (itemListFrom[itemTypeIndex] < 1) return;
+              itemListTo[itemTypeIndex]++;
+              itemListFrom[itemTypeIndex]--;
+              break;
+            case 1:
+              if (itemListTo[itemTypeIndex] < 1) return;
+              itemListTo[itemTypeIndex]--;
+              itemListFrom[itemTypeIndex]++;
+              break;
+            default:
+          }
         } else {
-          itemsToUse[itemTypeIndex]--;
-          itemsToUse[itemTypeIndex] < 0
-              ? itemsToUse[itemTypeIndex] = 0
-              : itemsToUse[itemTypeIndex];
+          if (index == 0) {
+            itemListTo[itemTypeIndex]++;
+            itemListTo[itemTypeIndex] > itemListFrom[itemTypeIndex]
+                ? itemListTo[itemTypeIndex] = itemListFrom[itemTypeIndex]
+                : itemListTo[itemTypeIndex];
+          } else {
+            itemListTo[itemTypeIndex]--;
+            itemListTo[itemTypeIndex] < 0
+                ? itemListTo[itemTypeIndex] = 0
+                : itemListTo[itemTypeIndex];
+          }
         }
-        resolveItemsToUse();
+        onPressed();
       },
     );
   }
