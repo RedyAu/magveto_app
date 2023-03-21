@@ -24,7 +24,7 @@ class RedeemButtons extends StatelessWidget {
 
   Widget redeemButton(GroundTile tile, BuildContext context) {
     return Hero(
-      tag: "redeem_${tile.type.name}",
+      tag: tile.hashCode,
       child: FilledButton.tonal(
         onPressed: () => Navigator.push(
           context,

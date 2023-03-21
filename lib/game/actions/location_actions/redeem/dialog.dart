@@ -17,7 +17,7 @@ class _RedeemDialogState extends State<RedeemDialog> {
     GameProvider game = GameProvider.of(context);
 
     return ActionDialog(
-        heroTag: "redeem_${widget.tile.type.name}",
+        heroTag: widget.tile.hashCode,
         title: "${widget.tile.type.displayName}mező megváltása",
         icon: Icon(Icons.stream_sharp),
         child: Column(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../graphics/background.dart';
 
 class ActionDialog extends StatelessWidget {
-  final String heroTag;
+  final Object heroTag;
   final String title;
   final Widget? icon;
   final Widget child;
