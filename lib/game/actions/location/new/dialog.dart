@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/actions/location_actions/new/inventory-split_dialog.dart';
+import 'package:magveto_app/game/actions/location/new/inventory-split_dialog.dart';
 import 'package:magveto_app/game/location/ground_tiles_view.dart';
 import 'package:magveto_app/graphics/drag_card.dart';
 

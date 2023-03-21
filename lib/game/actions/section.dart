@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
-import 'location_actions/view.dart';
+import 'location/view.dart';
 
 class ActionsSection extends StatelessWidget {
   const ActionsSection({super.key});
@@ -12,9 +12,12 @@ class ActionsSection extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, game, child) => Column(
         children: [
+          Spacer(),
           LocationActionsView(),
+          Spacer(),
+          Spacer(),
           //? Test actions
-          Wrap(
+          /*Wrap(
             children: [
               ElevatedButton(
                 onPressed: () {
@@ -52,7 +55,7 @@ class ActionsSection extends StatelessWidget {
                 child: const Text('Reset redeem, change type'),
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

@@ -35,6 +35,13 @@ class GameProvider extends ChangeNotifier {
   int _round = 1;
   int get round => _round;
 
+  bool _rolledDice = false;
+  bool get rolledDice => _rolledDice;
+  set rolledDice(bool value) {
+    _rolledDice = value;
+    notifyListeners();
+  }
+
   AutoScrollController? locationsController;
 
   List<Function> postCharacterCallbacks = [

@@ -46,7 +46,6 @@ class _GroundTileWidgetState extends State<GroundTileWidget>
 
   @override
   Widget build(BuildContext context) {
-    // TODO listen to this specific instance changing?
     if (wasRedeemed != widget.tile.isRedeemed) {
       wasRedeemed = widget.tile.isRedeemed;
       if (_status == AnimationStatus.dismissed) {

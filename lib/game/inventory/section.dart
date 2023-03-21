@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../graphics/inventory_slot.dart';
 import '../../logic/index.dart';

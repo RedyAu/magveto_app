@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magveto_app/game/actions/location_actions/new/button.dart';
+import 'package:magveto_app/game/actions/location/new/button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../logic/index.dart';
@@ -30,7 +30,7 @@ class LocationActionsView extends StatelessWidget {
                 Expanded(child: UpgradeLocationButton()),
               RimButton()
             ] else if (game.locationInPlay.type == LocationType.church) ...[
-              Expanded(child: NewLocationButton()),
+              Expanded(child: NewLocationButton(game.teamInPlay.id)),
               // TODO Optional choosable final event for church type!
               // TODO Possibility to relocate character to already existing location?
               RimButton()
