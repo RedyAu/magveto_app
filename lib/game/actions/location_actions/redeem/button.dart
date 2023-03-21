@@ -15,25 +15,25 @@ class RedeemButtons extends StatelessWidget {
         return Row(
           children: game.locationInPlay.tiles
               .where((element) => !element.isRedeemed)
-              .map((e) => Expanded(child: redeemButton(e.type, context)))
+              .map((e) => Expanded(child: redeemButton(e, context)))
               .toList(),
         );
       },
     );
   }
 
-  Widget redeemButton(GroundTileType type, BuildContext context) {
+  Widget redeemButton(GroundTile tile, BuildContext context) {
     return Hero(
-      tag: "redeem_${type.name}",
+      tag: "redeem_${tile.type.name}",
       child: FilledButton.tonal(
         onPressed: () => Navigator.push(
           context,
           ActionRoute(
-            builder: (context) => RedeemDialog(type),
+            builder: (context) => RedeemDialog(tile),
           ),
         ),
         child: Image.asset(
-          "assets/button/redeem_${type.name}.png",
+          "assets/button/redeem_${tile.type.name}.png",
           filterQuality: FilterQuality.medium,
         ),
       ),

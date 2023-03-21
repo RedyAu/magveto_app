@@ -4,8 +4,8 @@ import '../../../../logic/index.dart';
 import '../../../action_dialog.dart';
 
 class RedeemDialog extends StatefulWidget {
-  final GroundTileType type;
-  const RedeemDialog(this.type, {Key? key}) : super(key: key);
+  final GroundTile tile;
+  const RedeemDialog(this.tile, {Key? key}) : super(key: key);
 
   @override
   _RedeemDialogState createState() => _RedeemDialogState();
@@ -17,32 +17,32 @@ class _RedeemDialogState extends State<RedeemDialog> {
     GameProvider game = GameProvider.of(context);
 
     return ActionDialog(
-        heroTag: "redeem_${widget.type.name}",
-        title: "${widget.type.displayName}mező megváltása",
+        heroTag: "redeem_${widget.tile.type.name}",
+        title: "${widget.tile.type.displayName}mező megváltása",
         icon: Icon(Icons.stream_sharp),
         child: Column(
           children: [
             Image.asset(
-              "assets/button/redeem_${widget.type.name}.png",
+              "assets/button/redeem_${widget.tile.type.name}.png",
               height: 100,
               filterQuality: FilterQuality.medium,
             ),
             SizedBox(height: 20),
-            Text(widget.type.description),
+            Text(widget.tile.type.description),
             SizedBox(height: 20),
             ActionSegmentTitle("A megváltáshoz be kell adnod:"),
             SizedBox(height: 20),
             Wrap(
               children: game.characterInPlay.inventory!
-                  .getCompareWithBlessingWidgetList(widget.type.giveToRedeem)
+                  .getCompareWithBlessingWidgetList(widget.tile.type.giveToRedeem)
                   .map((e) => SizedBox(height: 65, child: e))
                   .toList(),
             ),
             ActionSegmentTitle(
-              game.characterInPlay.inventory!.canTake(widget.type.giveToRedeem)
+              game.characterInPlay.inventory!.canTake(widget.tile.type.giveToRedeem)
                   ? "Be tudsz adni mindent! ✅"
                   : (game.characterInPlay.inventory!
-                              .getTakeWithBlessing(widget.type.giveToRedeem) !=
+                              .getTakeWithBlessing(widget.tile.type.giveToRedeem) !=
                           null
                       ? "Be tudsz adni mindent, de a hitből kell építkezned!"
                       : "Nem tudsz beadni mindent!"),
@@ -50,18 +50,14 @@ class _RedeemDialogState extends State<RedeemDialog> {
             ),
             SizedBox(height: 20),
             FilledButton(
-                // TODO same tile gets redeemed as the one that was clicked on (when multiple tiles of same type)! (also hero doesn't work)
                 onPressed: game.characterInPlay.inventory!
-                            .getTakeWithBlessing(widget.type.giveToRedeem) !=
+                            .getTakeWithBlessing(widget.tile.type.giveToRedeem) !=
                         null
                     ? () {
                         game.characterInPlay.inventory!.take(game
                             .characterInPlay.inventory!
-                            .getTakeWithBlessing(widget.type.giveToRedeem)!);
-                        game.locationInPlay.tiles
-                            .firstWhere(
-                                (element) => element.type == widget.type)
-                            .isRedeemed = true;
+                            .getTakeWithBlessing(widget.tile.type.giveToRedeem)!);
+                        widget.tile.isRedeemed = true;
                         game.notify();
                         Navigator.pop(context);
                       }
