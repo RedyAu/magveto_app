@@ -13,6 +13,7 @@ class RedeemButtons extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, game, child) {
         return Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: game.locationInPlay.tiles
               .where((element) => !element.isRedeemed)
               .map((e) => Expanded(child: redeemButton(e, context)))

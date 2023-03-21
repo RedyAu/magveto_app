@@ -14,55 +14,58 @@ class InventorySlotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/other/slot.png'),
-            filterQuality: FilterQuality.medium,
+    return Hero(
+      tag: type,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/other/slot.png'),
+              filterQuality: FilterQuality.medium,
+            ),
+            borderRadius: BorderRadius.circular(8),
           ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(4),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(4),
-                child: Image.asset(
-                  "assets/item/${type.name}.png",
-                  filterQuality: FilterQuality.medium,
-                ),
-              ),
-              ...List.generate(
-                count,
-                (int index) => randomItemTransformForSeed(
-                  index,
-                  ItemWidget(type: type),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 5,
-                child: Text(
-                  count.toString(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black,
-                        offset: Offset(1, 1),
-                        blurRadius: 2,
-                      ),
-                    ],
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Image.asset(
+                    "assets/item/${type.name}.png",
+                    filterQuality: FilterQuality.medium,
                   ),
                 ),
-              ),
-            ],
+                ...List.generate(
+                  count,
+                  (int index) => randomItemTransformForSeed(
+                    index,
+                    ItemWidget(type: type),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 5,
+                  child: Text(
+                    count.toString(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black,
+                          offset: Offset(1, 1),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

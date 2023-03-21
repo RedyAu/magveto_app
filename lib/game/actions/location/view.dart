@@ -13,7 +13,7 @@ class LocationActionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(builder: (context, game, child) {
       return Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         height: 90,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,9 +31,8 @@ class LocationActionsView extends StatelessWidget {
               RimButton()
             ] else if (game.locationInPlay.type == LocationType.church) ...[
               Expanded(child: NewLocationButton(game.teamInPlay.id)),
-              // TODO Optional choosable final event for church type!
               // TODO Possibility to relocate character to already existing location?
-              RimButton()
+              RimButton(),
             ],
           ],
         ),

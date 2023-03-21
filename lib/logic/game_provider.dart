@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart' show BuildContext, ChangeNotifier;
+import 'package:magveto_app/game/actions/round/roll/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'index.dart';
+
+//typedef void RollResultCallback(RollResult result);
 
 class GameProvider extends ChangeNotifier {
   List<Team> _teams = [];
@@ -35,23 +38,25 @@ class GameProvider extends ChangeNotifier {
   int _round = 1;
   int get round => _round;
 
-  bool _rolledDice = false;
-  bool get rolledDice => _rolledDice;
-  set rolledDice(bool value) {
-    _rolledDice = value;
-    notifyListeners();
-  }
+  
+  static bool rolledDice = false;
+  
 
   AutoScrollController? locationsController;
 
   List<Function> postCharacterCallbacks = [
     () => print("### Post character callbacks"),
+    () => rolledDice = false,
   ];
   List<Function> postTeamCallbacks = [
     () => print("### Post team callbacks"),
   ];
-  List<Function> postDiceCallbacks = [
-    () => print("### Post dice callbacks"),
+  List<Function(RollResult)> postDiceCallbacks = [
+    (r) => print("### Post dice callbacks, rolled $r"),
+    (_) => rolledDice = true,
+    (r) {
+      
+    },
   ];
   List<Function> postRoundCallbacks = [
     () => print("### Post round callbacks"),

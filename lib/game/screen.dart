@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:magveto_app/logic/game_provider.dart';
 
 import '../graphics/background.dart';
-import '../logic/roll.dart';
 import 'actions/section.dart';
 import 'inventory/section.dart';
 import 'location/section.dart';
@@ -44,7 +43,7 @@ class GameScreen extends StatelessWidget {
                     .characterInPlay
                     .inventory!),
                 RoadsSection(),
-                ActionsSection(),
+                Expanded(child: ActionsSection()),
               ],
             ))
           ],
@@ -54,44 +53,3 @@ class GameScreen extends StatelessWidget {
   }
 }
 
-class RollDialog extends StatefulWidget {
-  const RollDialog({super.key});
-
-  @override
-  _RollDialogState createState() => _RollDialogState();
-}
-
-class _RollDialogState extends State<RollDialog> {
-  late Stream<Roll> rollStream;
-  bool _isRolling = false;
-
-  @override
-  void initState() {
-    super.initState();
-    rollStream = Stream.empty();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          RollWidget(rollStream: rollStream),
-          FilledButton(
-            onPressed: !_isRolling ? _startRoll : null,
-            child: const Text('Roll'),
-          )
-        ],
-      ),
-    );
-  }
-
-  void _startRoll() {
-    setState(() {
-      rollStream = randomRollStream().asBroadcastStream();
-      _isRolling = true;
-      rollStream.last.then((_) => setState(() => _isRolling = false));
-    });
-  }
-}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/game/actions/round/view.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
@@ -15,6 +16,7 @@ class ActionsSection extends StatelessWidget {
           Spacer(),
           LocationActionsView(),
           Spacer(),
+          RoundActionsView(),
           Spacer(),
           //? Test actions
           /*Wrap(

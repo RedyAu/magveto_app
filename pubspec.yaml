@@ -28,3 +28,5 @@ flutter:
     - assets/button/community/
     - assets/button/outpost/
     - assets/button/church/
+    - assets/event/
+    - assets/dice/

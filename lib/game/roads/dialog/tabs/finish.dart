@@ -15,6 +15,8 @@ class FinishRoadTab extends StatelessWidget {
     required this.tabController,
   });
 
+  // TODO only allow finish if all parties minimum community
+
   @override
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(builder: (context, game, child) {
