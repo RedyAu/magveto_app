@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
 import 'package:magveto_app/logic/game_provider.dart';
 
+import '../../../../logic/index.dart';
 import 'utils.dart';
 
 class RollDialog extends StatefulWidget {
@@ -26,6 +27,25 @@ class _RollDialogState extends State<RollDialog> {
 
   @override
   Widget build(BuildContext context) {
+    var game = GameProvider.of(context);
+
+    List<Character> charactersToReceive = [];
+    List<Widget> receivingIDWidgets = [];
+
+    charactersToReceive.add(game.characterInPlay);
+    receivingIDWidgets.add(game.teamInPlay.idWidgetFor(game.characterInPlay));
+
+    var teams = game.brotherConnections
+        .where((b) => b.isActive && b.hasTeam(game.teamInPlay))
+        .map((b) => b.teams.firstWhere((t) => t != game.teamInPlay));
+
+    for (var team in teams) {
+      for (var character in team.characters) {
+        charactersToReceive.add(character);
+        receivingIDWidgets.add(team.idWidgetFor(character));
+      }
+    }
+
     return ActionDialog(
       heroTag: "roll",
       title: "Dobás",
@@ -61,17 +81,37 @@ class _RollDialogState extends State<RollDialog> {
                   )
                 : Container(),
           ),
+          AnimatedSize(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOutCubicEmphasized,
+              child: (result != null &&
+                      result != RollResult.eventCard &&
+                      result != RollResult.choose &&
+                      charactersToReceive.length > 1)
+                  ? Column(
+                      children: [
+                        ActionSegmentTitle("Megkapják:"),
+                        Wrap(
+                          children: receivingIDWidgets
+                              .map((e) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: e,
+                                  ))
+                              .toList(),
+                        ),
+                        SizedBox(height: 15),
+                      ],
+                    )
+                  : Container()),
           FilledButton(
             onPressed: (result == null || result == RollResult.choose)
                 ? null
                 : () {
                     if (result == RollResult.eventCard) {
                     } else {
-                      var game = GameProvider.of(context);
-                      game.postDiceCallbacks.forEach((e) {
-                        e(result!);
-                      });
+                      giveRollResultToAll(result!, charactersToReceive);
                       game.notify();
+                      Navigator.of(context).pop();
                     }
                   },
             child: const Text('Kérem!', style: TextStyle(fontSize: 20)),

@@ -128,3 +128,27 @@ class RollWidget extends StatelessWidget {
     );
   }
 }
+
+/// Remember to call game.notify() after using this function
+void giveRollResultToAll(RollResult result, List<Character> characters) {
+  Inventory inventoryToGive = Inventory();
+
+  switch (result) {
+    case RollResult.scripture:
+      inventoryToGive.scripture = 1;
+      break;
+    case RollResult.prayer:
+      inventoryToGive.prayer = 1;
+      break;
+    case RollResult.charity:
+      inventoryToGive.charity = 1;
+      break;
+    case RollResult.blessing:
+      inventoryToGive.blessing = 1;
+      break;
+    default:
+      break;
+  }
+
+  characters.forEach((c) => c.inventory?.give(inventoryToGive));
+}

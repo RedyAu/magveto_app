@@ -38,29 +38,9 @@ class GameProvider extends ChangeNotifier {
   int _round = 1;
   int get round => _round;
 
-  
-  static bool rolledDice = false;
-  
+  int rollsLeft = 1;
 
   AutoScrollController? locationsController;
-
-  List<Function> postCharacterCallbacks = [
-    () => print("### Post character callbacks"),
-    () => rolledDice = false,
-  ];
-  List<Function> postTeamCallbacks = [
-    () => print("### Post team callbacks"),
-  ];
-  List<Function(RollResult)> postDiceCallbacks = [
-    (r) => print("### Post dice callbacks, rolled $r"),
-    (_) => rolledDice = true,
-    (r) {
-      
-    },
-  ];
-  List<Function> postRoundCallbacks = [
-    () => print("### Post round callbacks"),
-  ];
 
   void notify() {
     notifyListeners();
@@ -74,11 +54,12 @@ class GameProvider extends ChangeNotifier {
       if (_teamInPlay >= _teams.length) {
         _teamInPlay = 0;
         _round++;
-        postRoundCallbacks.forEach((e) => e());
+        //! Post round logic
       }
-      postTeamCallbacks.forEach((e) => e());
+      //! Post team logic
     }
-    postCharacterCallbacks.forEach((e) => e());
+    //! Post character logic
+    rollsLeft = 1; // TODO maybe make this a field of the character?
     notifyListeners();
   }
 
@@ -91,10 +72,10 @@ class GameProvider extends ChangeNotifier {
       for (var character in team.characters) {
         // by default, the character gets one of each item
         character.inventory = new Inventory(
-          scripture: 10,
-          prayer: 10,
-          charity: 10,
-          blessing: 10,
+          scripture: 3,
+          prayer: 3,
+          charity: 3,
+          blessing: 3,
         );
         moveCharacterToLocation(character, teamLocation);
       }
