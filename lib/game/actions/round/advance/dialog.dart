@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:magveto_app/game/action_dialog.dart';
 
 class AdvanceDialog extends StatelessWidget {

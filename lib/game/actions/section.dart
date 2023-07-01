@@ -3,7 +3,9 @@ import 'package:magveto_app/game/actions/round/view.dart';
 import 'package:provider/provider.dart';
 
 import '../../logic/index.dart';
+import '../action_dialog.dart';
 import 'location/view.dart';
+import 'round/roll/dialog.dart';
 
 class ActionsSection extends StatelessWidget {
   const ActionsSection({super.key});
@@ -13,12 +15,32 @@ class ActionsSection extends StatelessWidget {
     return Consumer<GameProvider>(
       builder: (context, game, child) => Column(
         children: [
-          Spacer(),
+          //Spacer(),
           LocationActionsView(),
-          Spacer(),
+          //Spacer(),
           RoundActionsView(),
-          Spacer(),
+          //Spacer(),
           //? Test actions
+          Expanded(
+            child: ListView(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      ActionRoute(builder: (context) => RollDialog()),
+                    );
+                  },
+                  child: const Text('Roll dialog'),
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      game.characterInPlay.additionalIds.toggle(CID.gertrud),
+                  child: const Text('Toggle Gertrud'),
+                )
+              ],
+            ),
+          ),
           /*Wrap(
             children: [
               ElevatedButton(

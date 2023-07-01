@@ -25,14 +25,17 @@ enum CID {
 
 class Character {
   Player? player;
-  final CID id;
+  final CID ownId;
+  Set<CID> additionalIds = {};
   final String letter;
   final String name;
   final String description;
   Inventory? inventory;
   Location? currentLocation;
 
-  Character(this.id, this.letter, this.name, this.description);
+  List<CID> get ids => [ownId, ...additionalIds];
+
+  Character(this.ownId, this.letter, this.name, this.description);
 }
 
 class CharacterWithTeam {
@@ -144,5 +147,16 @@ class RoadConnection {
 
   RoadConnection(TeamRoads team1, TeamRoads team2) {
     between = List.from([team1, team2], growable: false);
+  }
+}
+
+
+extension ToggleSetMember on Set {
+  void toggle(dynamic value) {
+    if (contains(value)) {
+      remove(value);
+    } else {
+      add(value);
+    }
   }
 }

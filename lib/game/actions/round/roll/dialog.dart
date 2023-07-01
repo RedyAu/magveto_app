@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
-import 'package:magveto_app/logic/game_provider.dart';
 
-import '../../../../graphics/index.dart';
 import '../../../../logic/index.dart';
+import 'trait_choose.dart';
 import 'utils.dart';
 
 class RollDialog extends StatefulWidget {
@@ -14,8 +13,9 @@ class RollDialog extends StatefulWidget {
 }
 
 class _RollDialogState extends State<RollDialog> {
-  late Stream<RollResult> rollStream;
-  RollResult? result = null;
+  late Stream<RollOutcome> rollStream;
+  RollOutcome? outcome = null;
+  RollOutcome? rolled = null;
 
   @override
   void initState() {
@@ -23,7 +23,14 @@ class _RollDialogState extends State<RollDialog> {
     rollStream = Stream.empty();
 
     rollStream = randomRollStream().asBroadcastStream();
-    rollStream.last.then((r) => setState(() => result = r));
+    rollStream.last.then(
+      (r) => setState(
+        () {
+          outcome = r;
+          rolled = r;
+        },
+      ),
+    );
   }
 
   @override
@@ -50,31 +57,31 @@ class _RollDialogState extends State<RollDialog> {
     return ActionDialog(
       heroTag: "roll",
       title: "Dobás",
-      showCloseButton: false, // TODO uncomment
+      //showCloseButton: false, // TODO uncomment
       icon: Icon(Icons.casino_outlined),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          RollWidget(rollStream: rollStream, result: result),
+          RollWidget(rollStream: rollStream, result: outcome),
           SizedBox(height: 30),
           AnimatedSize(
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOutCubicEmphasized,
-            child: result == RollResult.choose
+            child: outcome == RollOutcome.choose
                 ? Column(
                     children: [
                       ActionSegmentTitle("Választhatsz:"),
-                      DropdownButton<RollResult>(
-                          value: result,
+                      DropdownButton<RollOutcome>(
+                          value: outcome,
                           autofocus: true,
                           itemHeight: 70,
-                          items: RollResult.values
+                          items: RollOutcome.values
                               .map((v) => DropdownMenuItem(
-                                  value: v, child: Center(child: v.display)))
+                                  value: v, child: Center(child: v.widget)))
                               .toList(),
                           onChanged: (r) {
                             setState(() {
-                              result = r;
+                              outcome = r;
                             });
                           }),
                       SizedBox(height: 15),
@@ -85,9 +92,9 @@ class _RollDialogState extends State<RollDialog> {
           AnimatedSize(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOutCubicEmphasized,
-              child: (result != null &&
-                      result != RollResult.eventCard &&
-                      result != RollResult.choose &&
+              child: (outcome != null &&
+                      outcome != RollOutcome.eventCard &&
+                      outcome != RollOutcome.choose &&
                       charactersToReceive.length > 1)
                   ? Column(
                       children: [
@@ -101,72 +108,44 @@ class _RollDialogState extends State<RollDialog> {
                               .toList(),
                         ),
                         SizedBox(height: 15),
+                        // TODO character traits receiving
                       ],
                     )
                   : Container()),
           FilledButton(
-            onPressed: (result == null || result == RollResult.choose)
+            onPressed: (outcome == null || outcome == RollOutcome.choose)
                 ? null
                 : () {
-                    if (result == RollResult.eventCard) {
+                    if (outcome == RollOutcome.eventCard) {
                       // TODO event card
                     } else {
-                      giveRollResultToAll(result!, charactersToReceive);
+                      giveRollResultToAll(outcome!, charactersToReceive);
                       game.notify();
                     }
                     Navigator.pop(context);
-                    switch (game.characterInPlay.id) {
-                      case CID.gertrud:
-                        if (result!.value % 2 == 1) {
-                          Navigator.push(
-                              context,
-                              ActionRoute(
-                                  builder: (context) =>
-                                      RollChooseDialog(game.characterInPlay)));
-                        }
-                        break;
-                      case CID.ivan:
-                        if (result!.value % 2 == 0) {
-                          Navigator.push(
-                              context,
-                              ActionRoute(
-                                  builder: (context) =>
-                                      RollChooseDialog(game.characterInPlay)));
-                        }
-                        break;
-                      default:
+
+                    if (game.characterInPlay.ids.contains(CID.gertrud)) {
+                      if (rolled!.value % 2 == 1) {
+                        Navigator.push(
+                            context,
+                            ActionRoute(
+                                builder: (context) =>
+                                    TraitRollChooseDialog(CID.gertrud)));
+                      }
+                    }
+                    if (game.characterInPlay.ids.contains(CID.ivan)) {
+                      if (rolled!.value % 2 == 0) {
+                        Navigator.push(
+                            context,
+                            ActionRoute(
+                                builder: (context) =>
+                                    TraitRollChooseDialog(CID.ivan)));
+                      }
                     }
                   },
             child: const Text('Kérem!', style: TextStyle(fontSize: 20)),
           ),
           SizedBox(height: 15),
-        ],
-      ),
-    );
-  }
-}
-
-class RollChooseDialog extends StatefulWidget {
-  final Character character;
-  const RollChooseDialog(this.character, {super.key});
-
-  @override
-  State<RollChooseDialog> createState() => _RollChooseDialogState();
-}
-
-class _RollChooseDialogState extends State<RollChooseDialog> {
-  final items = [ItemType.scripture, ItemType.prayer, ItemType.charity];
-
-  @override
-  Widget build(BuildContext context) {
-    return ActionDialog(
-      title: widget.character.name,
-      child: Column(
-        children: [
-          Text(widget.character.description),
-          ActionSegmentTitle("Válassz:"),
-          FilledButton.tonal(
-           onPressed: () {}, child: ItemWidget(type: ItemType.scripture))
         ],
       ),
     );

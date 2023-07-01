@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:magveto_app/graphics/index.dart';
 import 'package:magveto_app/logic/index.dart';
 
-enum RollResult {
+enum RollOutcome {
   scripture(
     1,
     Hero(
@@ -63,19 +63,19 @@ enum RollResult {
   );
 
   final int value;
-  final Widget display;
+  final Widget widget;
   AssetImage get image => AssetImage('assets/dice/$value.png');
 
-  const RollResult(this.value, this.display);
+  const RollOutcome(this.value, this.widget);
 }
 
-extension RollUtils on RollResult {
-  static RollResult random() {
-    return RollResult.values[Random().nextInt(RollResult.values.length)];
+extension RollUtils on RollOutcome {
+  static RollOutcome random() {
+    return RollOutcome.values[Random().nextInt(RollOutcome.values.length)];
   }
 }
 
-Stream<RollResult> randomRollStream() async* {
+Stream<RollOutcome> randomRollStream() async* {
   var timer = 1000;
   var delay = 10;
   while (timer > 0) {
@@ -90,12 +90,12 @@ Stream<RollResult> randomRollStream() async* {
 class RollWidget extends StatelessWidget {
   const RollWidget({Key? key, required this.rollStream, required this.result})
       : super(key: key);
-  final RollResult? result;
-  final Stream<RollResult> rollStream;
+  final RollOutcome? result;
+  final Stream<RollOutcome> rollStream;
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<RollResult>(
+    return StreamBuilder<RollOutcome>(
       stream: rollStream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -119,7 +119,7 @@ class RollWidget extends StatelessWidget {
               ),
               ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: 80, maxWidth: 80),
-                  child: data.display),
+                  child: data.widget),
             ],
           );
         }
@@ -130,20 +130,20 @@ class RollWidget extends StatelessWidget {
 }
 
 /// Remember to call game.notify() after using this function
-void giveRollResultToAll(RollResult result, List<Character> characters) {
+void giveRollResultToAll(RollOutcome result, List<Character> characters) {
   Inventory inventoryToGive = Inventory();
 
   switch (result) {
-    case RollResult.scripture:
+    case RollOutcome.scripture:
       inventoryToGive.scripture = 1;
       break;
-    case RollResult.prayer:
+    case RollOutcome.prayer:
       inventoryToGive.prayer = 1;
       break;
-    case RollResult.charity:
+    case RollOutcome.charity:
       inventoryToGive.charity = 1;
       break;
-    case RollResult.blessing:
+    case RollOutcome.blessing:
       inventoryToGive.blessing = 1;
       break;
     default:

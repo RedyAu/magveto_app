@@ -7,8 +7,8 @@ import '../../../action_dialog.dart';
 import 'pill_amount_button.dart';
 
 class BuildRoadTab extends StatefulWidget {
-  RoadConnection selectedConnection;
-  TabController tabController;
+  final RoadConnection selectedConnection;
+  final TabController tabController;
 
   BuildRoadTab(
       {Key? key, required this.selectedConnection, required this.tabController})

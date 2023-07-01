@@ -4,39 +4,81 @@ import 'team.dart';
 
 List<Team> getDefaultTeams() => [
       Team(1, Color(0xffffed00), [
-        Character(CID.joe, "A", "Joe, az áldott",
-            "Ha valaki áldást kap, Joe is részesedik belőle (ő is kap egy áldáscsillagot)."),
-        Character(CID.mary, "B", "Mary, a szervező",
-            "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá."),
+        Character(CID.joe, "A", characterNames[CID.joe]!,
+            characterDescriptions[CID.joe]!),
+        Character(CID.mary, "B", characterNames[CID.mary]!,
+            characterDescriptions[CID.mary]!),
       ]),
       Team(2, Color(0xffee7f00), [
-        Character(CID.janos, "A", "János, az egykönyvű ember",
-            "Ha valaki igeolvasáson vesz részt (1-est dob), János is ott van (ő is kap egy igekártyát)."),
-        Character(CID.maria, "B", "Mária, az építő",
-            "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania."),
+        Character(CID.janos, "A", characterNames[CID.janos]!,
+            characterDescriptions[CID.janos]!),
+        Character(CID.maria, "B", characterNames[CID.maria]!,
+            characterDescriptions[CID.maria]!),
       ]),
       Team(3, Color(0xffe2001a), [
-        Character(CID.hansi, "A", "Hansi, az arató",
-            "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja."),
-        Character(CID.gertrud, "B", "Gertrúd, a hiánypótló",
-            "Ha páratlant dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van."),
+        Character(CID.hansi, "A", characterNames[CID.hansi]!,
+            characterDescriptions[CID.hansi]!),
+        Character(CID.gertrud, "B", characterNames[CID.gertrud]!,
+            characterDescriptions[CID.gertrud]!),
       ]),
       Team(4, Color(0xff81197f), [
-        Character(CID.teofil, "A", "Teofil, a könyörületes szívű",
-            "Ha valaki diakóniai eseményen vesz részt (3-ast dob), Teofil is segít (ő is kap egy diakóniakártyát)."),
-        Character(CID.teofilia, "B", "Teofília, az útépítő",
-            "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá."),
+        Character(CID.teofil, "A", characterNames[CID.teofil]!,
+            characterDescriptions[CID.teofil]!),
+        Character(CID.teofilia, "B", characterNames[CID.teofilia]!,
+            characterDescriptions[CID.teofilia]!),
       ]),
       Team(5, Color(0xff008bd0), [
-        Character(CID.ivan, "A", "Iván, a hiánypótló",
-            "Ha párosat dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van."),
-        Character(CID.tatjana, "B", "Tatjana, az arató",
-            "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja."),
+        Character(CID.ivan, "A", characterNames[CID.ivan]!,
+            characterDescriptions[CID.ivan]!),
+        Character(CID.tatjana, "B", characterNames[CID.tatjana]!,
+            characterDescriptions[CID.tatjana]!),
       ]),
       Team(6, Color(0xff009037), [
-        Character(CID.jeanphilip, "A", "Jean-Philip, az imaharcos",
-            "Ha valaki imádkozik (2-est dob), Jean-Philip is vele tart (ő is kap egy imakártyát)."),
-        Character(CID.bernadette, "B", "Bernadette, a szolgáló",
-            "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania."),
+        Character(CID.jeanphilip, "A", characterNames[CID.jeanphilip]!,
+            characterDescriptions[CID.jeanphilip]!),
+        Character(CID.bernadette, "B", characterNames[CID.bernadette]!,
+            characterDescriptions[CID.bernadette]!),
       ]),
     ];
+    
+Map<CID, String> characterNames = {
+  CID.joe: "Joe, az áldott",
+  CID.mary: "Mary, a szervező",
+  CID.janos: "János, az egykönyvű ember",
+  CID.maria: "Mária, az építő",
+  CID.hansi: "Hansi, az arató",
+  CID.gertrud: "Gertrúd, a hiánypótló",
+  CID.teofil: "Teofil, a könyörületes szívű",
+  CID.teofilia: "Teofília, az útépítő",
+  CID.ivan: "Iván, a hiánypótló",
+  CID.tatjana: "Tatjana, az arató",
+  CID.jeanphilip: "Jean-Philip, az imaharcos",
+  CID.bernadette: "Bernadette, a szolgáló",
+};
+
+Map<CID, String> characterDescriptions = {
+  CID.joe:
+      "Ha valaki áldást kap, Joe is részesedik belőle (ő is kap egy áldáscsillagot).",
+  CID.mary:
+      "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
+  CID.janos:
+      "Ha valaki igeolvasáson vesz részt (1-est dob), János is ott van (ő is kap egy igekártyát).",
+  CID.maria:
+      "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania.",
+  CID.hansi:
+      "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja.",
+  CID.gertrud:
+      "Ha páratlant dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
+  CID.teofil:
+      "Ha valaki diakóniai eseményen vesz részt (3-ast dob), Teofil is segít (ő is kap egy diakóniakártyát).",
+  CID.teofilia:
+      "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
+  CID.ivan:
+      "Ha párosat dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
+  CID.tatjana:
+      "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja.",
+  CID.jeanphilip:
+      "Ha valaki imádkozik (2-est dob), Jean-Philip is vele tart (ő is kap egy imakártyát).",
+  CID.bernadette:
+      "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania.",
+};
