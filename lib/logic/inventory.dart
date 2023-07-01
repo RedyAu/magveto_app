@@ -189,6 +189,8 @@ class Inventory {
   }
 
   void give(Inventory other) {
+    // todo if giving a blessing, also give to CID.joe (maybe here?)
+    // todo also should separate moving items and giving from bank better?
     scripture += other.scripture;
     prayer += other.prayer;
     charity += other.charity;

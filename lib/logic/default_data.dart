@@ -57,27 +57,27 @@ Map<CID, String> characterNames = {
 };
 
 Map<CID, String> characterDescriptions = {
-  CID.joe:
+  CID.joe: //! how the hell even
       "Ha valaki áldást kap, Joe is részesedik belőle (ő is kap egy áldáscsillagot).",
   CID.mary:
       "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
-  CID.janos:
+  CID.janos: //? done
       "Ha valaki igeolvasáson vesz részt (1-est dob), János is ott van (ő is kap egy igekártyát).",
   CID.maria:
       "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania.",
   CID.hansi:
       "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja.",
-  CID.gertrud:
+  CID.gertrud: //? done
       "Ha páratlant dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
-  CID.teofil:
+  CID.teofil: //? done
       "Ha valaki diakóniai eseményen vesz részt (3-ast dob), Teofil is segít (ő is kap egy diakóniakártyát).",
   CID.teofilia:
       "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
-  CID.ivan:
+  CID.ivan: //? done
       "Ha párosat dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
   CID.tatjana:
       "Ha két földje váltságot nyer, ráadásként a harmadikat is megfordíthatja.",
-  CID.jeanphilip:
+  CID.jeanphilip: //? done
       "Ha valaki imádkozik (2-est dob), Jean-Philip is vele tart (ő is kap egy imakártyát).",
   CID.bernadette:
       "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania.",

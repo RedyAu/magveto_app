@@ -131,6 +131,8 @@ class RollWidget extends StatelessWidget {
 
 /// Remember to call game.notify() after using this function
 void giveRollResultToAll(RollOutcome result, List<Character> characters) {
+  print('Giving $result to all: ${characters.map((c) => c.name).toList()}');
+
   Inventory inventoryToGive = Inventory();
 
   switch (result) {
@@ -151,4 +153,30 @@ void giveRollResultToAll(RollOutcome result, List<Character> characters) {
   }
 
   characters.forEach((c) => c.inventory?.give(inventoryToGive));
+}
+
+List<CharacterWithTeam> getOtherCharactersByTraitForOutcome(
+    RollOutcome outcome, GameProvider game) {
+  switch (outcome) {
+    case RollOutcome.scripture:
+      return game.charactersWithTeams
+          .where((c) =>
+              c.character.ids.contains(CID.janos) &&
+              c.character != game.characterInPlay)
+          .toList();
+    case RollOutcome.prayer:
+      return game.charactersWithTeams
+          .where((c) =>
+              c.character.ids.contains(CID.jeanphilip) &&
+              c.character != game.characterInPlay)
+          .toList();
+    case RollOutcome.charity:
+      return game.charactersWithTeams
+          .where((c) =>
+              c.character.ids.contains(CID.teofil) &&
+              c.character != game.characterInPlay)
+          .toList();
+    default:
+      return [];
+  }
 }
