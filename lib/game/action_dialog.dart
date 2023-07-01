@@ -11,7 +11,7 @@ class ActionDialog extends StatelessWidget {
 
   const ActionDialog({
     required this.child,
-    required this.heroTag,
+    this.heroTag = "", // HACK
     required this.title,
     this.icon,
     this.showCloseButton = true,

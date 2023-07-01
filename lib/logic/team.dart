@@ -8,15 +8,31 @@ class Player {
   Player(this.name);
 }
 
+enum CID {
+  joe,
+  mary,
+  janos,
+  maria,
+  hansi,
+  gertrud,
+  teofil,
+  teofilia,
+  ivan,
+  tatjana,
+  jeanphilip,
+  bernadette
+}
+
 class Character {
   Player? player;
+  final CID id;
   final String letter;
   final String name;
   final String description;
   Inventory? inventory;
   Location? currentLocation;
 
-  Character(this.letter, this.name, this.description);
+  Character(this.id, this.letter, this.name, this.description);
 }
 
 class CharacterWithTeam {

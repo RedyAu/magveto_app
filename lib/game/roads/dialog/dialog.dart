@@ -71,6 +71,7 @@ class _BuildRoadDialogState extends State<BuildRoadDialog>
 
   @override
   Widget build(BuildContext context) {
+    // TODO add tab for repair if finished but not active (get necessary items from event)
     return ActionDialog(
       icon: Icon(Icons.add_road),
       title: "Út építése",

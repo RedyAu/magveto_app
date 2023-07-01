@@ -18,6 +18,7 @@ class RoadsSection extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // TODO hide button if every possible connection is built and active
             Tooltip(
               preferBelow: false,
               message: game.characterInPlay.currentLocation!.type ==

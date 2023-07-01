@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magveto_app/game/action_dialog.dart';
 import 'package:magveto_app/logic/game_provider.dart';
 
+import '../../../../graphics/index.dart';
 import '../../../../logic/index.dart';
 import 'utils.dart';
 
@@ -49,7 +50,7 @@ class _RollDialogState extends State<RollDialog> {
     return ActionDialog(
       heroTag: "roll",
       title: "Dobás",
-      //showCloseButton: false, // TODO uncomment
+      showCloseButton: false, // TODO uncomment
       icon: Icon(Icons.casino_outlined),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -108,15 +109,64 @@ class _RollDialogState extends State<RollDialog> {
                 ? null
                 : () {
                     if (result == RollResult.eventCard) {
+                      // TODO event card
                     } else {
                       giveRollResultToAll(result!, charactersToReceive);
                       game.notify();
-                      Navigator.of(context).pop();
+                    }
+                    Navigator.pop(context);
+                    switch (game.characterInPlay.id) {
+                      case CID.gertrud:
+                        if (result!.value % 2 == 1) {
+                          Navigator.push(
+                              context,
+                              ActionRoute(
+                                  builder: (context) =>
+                                      RollChooseDialog(game.characterInPlay)));
+                        }
+                        break;
+                      case CID.ivan:
+                        if (result!.value % 2 == 0) {
+                          Navigator.push(
+                              context,
+                              ActionRoute(
+                                  builder: (context) =>
+                                      RollChooseDialog(game.characterInPlay)));
+                        }
+                        break;
+                      default:
                     }
                   },
             child: const Text('Kérem!', style: TextStyle(fontSize: 20)),
           ),
           SizedBox(height: 15),
+        ],
+      ),
+    );
+  }
+}
+
+class RollChooseDialog extends StatefulWidget {
+  final Character character;
+  const RollChooseDialog(this.character, {super.key});
+
+  @override
+  State<RollChooseDialog> createState() => _RollChooseDialogState();
+}
+
+class _RollChooseDialogState extends State<RollChooseDialog> {
+  final items = [ItemType.scripture, ItemType.prayer, ItemType.charity];
+
+  @override
+  Widget build(BuildContext context) {
+    return ActionDialog(
+      title: widget.character.name,
+      child: Column(
+        children: [
+          Text(widget.character.description),
+          ActionSegmentTitle("Válassz:"),
+          FilledButton.tonal(
+           onPressed: () {}, child: ItemWidget(type: ItemType.scripture))
         ],
       ),
     );
