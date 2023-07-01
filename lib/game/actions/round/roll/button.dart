@@ -29,7 +29,12 @@ class RollButton extends StatelessWidget {
                 'assets/button/roll.png',
                 filterQuality: FilterQuality.medium,
               )),
-          label: Text("Dobás", softWrap: false, overflow: TextOverflow.fade),
+          label: Badge(
+              label: Text(game.rollsLeft.toString()),
+              offset: Offset(15, -5),
+              isLabelVisible: game.rollsLeft > 1,
+              child:
+                  Text("Dobás", softWrap: false, overflow: TextOverflow.fade)),
         );
       }),
     );
