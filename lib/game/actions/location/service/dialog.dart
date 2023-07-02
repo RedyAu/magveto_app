@@ -118,7 +118,7 @@ class _ServicesDialogState extends State<ServicesDialog> {
                                           .getTakeWithBlessing(
                                               selectedService.giveToStart) !=
                                       null
-                                  ? "Be tudsz adni mindent, de a hitből kell építkezned!"
+                                  ? "Be tudsz adni mindent, de hitből kell építkezned!"
                                   : "Nem tudsz beadni mindent!"),
                           subtitle: true,
                         ),

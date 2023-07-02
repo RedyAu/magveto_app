@@ -105,7 +105,7 @@ class _RimDialogState extends State<RimDialog> {
                                         .getTakeWithBlessing(
                                             selectedTileType.giveToRedeem) !=
                                     null
-                                ? "Be tudsz adni mindent, de a hitből kell építkezned!"
+                                ? "Be tudsz adni mindent, de hitből kell építkezned!"
                                 : "Nem tudsz beadni mindent!"),
                         subtitle: true,
                       ),

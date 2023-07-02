@@ -258,7 +258,7 @@ Most eldönthetitek, hogy a csapat mindkét misszionáriusa az új állomásra k
                 : (game.characterInPlay.inventory!
                             .getTakeWithBlessing(_neededForNew) !=
                         null
-                    ? "Be tudsz adni mindent, de a hitből kell építkezned!"
+                    ? "Be tudsz adni mindent, de hitből kell építkezned!"
                     : "Nem tudsz beadni mindent!"),
             subtitle: true,
           ),
