@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magveto_app/logic/default_data.dart';
 
 import 'inventory.dart';
 import 'location.dart';
@@ -23,6 +24,18 @@ enum CID {
   bernadette
 }
 
+enum Trait {
+  freeRoad,
+  thirdService,
+  thirdTile,
+  oddRoll,
+  evenRoll,
+  scriptureRoll,
+  prayerRoll,
+  charityRoll,
+  allBlessing
+}
+
 class Character {
   Player? player;
   final CID ownId;
@@ -34,6 +47,11 @@ class Character {
   Location? currentLocation;
 
   List<CID> get ids => [ownId, ...additionalIds];
+
+  Set<Trait> usedTrait = {};
+
+  CID? hasTrait(Trait trait) =>
+      traitMap[trait]!.firstWhere((id) => ids.contains(id), orElse: () => null);
 
   Character(this.ownId, this.letter, this.name, this.description);
 }
@@ -149,7 +167,6 @@ class RoadConnection {
     between = List.from([team1, team2], growable: false);
   }
 }
-
 
 extension ToggleSetMember on Set {
   void toggle(dynamic value) {

@@ -161,19 +161,19 @@ List<CharacterWithTeam> getOtherCharactersByTraitForOutcome(
     case RollOutcome.scripture:
       return game.charactersWithTeams
           .where((c) =>
-              c.character.ids.contains(CID.janos) &&
+              c.character.hasTrait(Trait.scriptureRoll) != null &&
               c.character != game.characterInPlay)
           .toList();
     case RollOutcome.prayer:
       return game.charactersWithTeams
           .where((c) =>
-              c.character.ids.contains(CID.jeanphilip) &&
+              c.character.hasTrait(Trait.prayerRoll) != null &&
               c.character != game.characterInPlay)
           .toList();
     case RollOutcome.charity:
       return game.charactersWithTeams
           .where((c) =>
-              c.character.ids.contains(CID.teofil) &&
+              c.character.hasTrait(Trait.charityRoll) != null &&
               c.character != game.characterInPlay)
           .toList();
     default:

@@ -26,6 +26,16 @@ class _BuildRoadTabState extends State<BuildRoadTab>
   List<int> itemsGotUsed = [0, 0, 0, 0];
   int roadsGotBuilt = 0;
 
+  int get roadsGotBuiltTraitOffset =>
+      (GameProvider.of(context).characterInPlay.hasTrait(Trait.freeRoad) !=
+                  null) &&
+              !GameProvider.of(context)
+                  .characterInPlay
+                  .usedTrait
+                  .contains(Trait.freeRoad)
+          ? 1
+          : 0;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(builder: (context, game, child) {
@@ -98,6 +108,18 @@ class _BuildRoadTabState extends State<BuildRoadTab>
             ),
           ),
           Divider(height: 25),
+          if (roadsGotBuiltTraitOffset > 0) ...[
+            ActionSegmentTitle(characterNames[
+                game.characterInPlay.hasTrait(Trait.freeRoad)!]!),
+            ActionSegmentTitle(
+              characterDescriptions[
+                  game.characterInPlay.hasTrait(Trait.freeRoad)!]!,
+              subtitle: true,
+            ),
+            Divider(
+              height: 25,
+            ),
+          ],
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -107,7 +129,8 @@ class _BuildRoadTabState extends State<BuildRoadTab>
                 child: FittedBox(
                   fit: BoxFit.fill,
                   child: RoadCountWidget(
-                      color: game.teamInPlay.color, count: roadsGotBuilt),
+                      color: game.teamInPlay.color,
+                      count: roadsGotBuilt + roadsGotBuiltTraitOffset),
                 ),
               ),
               Text(" db útelem", style: TextStyle(fontSize: 20)),
@@ -117,7 +140,7 @@ class _BuildRoadTabState extends State<BuildRoadTab>
           SizedBox(
             height: 35,
             child: FilledButton(
-              onPressed: roadsGotBuilt > 0
+              onPressed: roadsGotBuilt + roadsGotBuiltTraitOffset > 0
                   ? () {
                       bool couldFinish =
                           widget.selectedConnection.canBeFinished;
@@ -134,12 +157,14 @@ class _BuildRoadTabState extends State<BuildRoadTab>
                       widget.selectedConnection.between
                           .firstWhere(
                               (element) => element.team == game.teamInPlay)
-                          .roads += roadsGotBuilt;
+                          .roads += (roadsGotBuilt + roadsGotBuiltTraitOffset);
 
                       // add the selected connection to game if it is not already there
                       if (!game.brotherConnections
                           .contains(widget.selectedConnection))
                         game.brotherConnections.add(widget.selectedConnection);
+
+                      game.characterInPlay.usedTrait.add(Trait.freeRoad);
 
                       game.notify();
 

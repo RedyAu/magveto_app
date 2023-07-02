@@ -158,22 +158,26 @@ class _RollDialogState extends State<RollDialog> {
                       }
                       Navigator.pop(context);
 
-                      if (game.characterInPlay.ids.contains(CID.gertrud)) {
+                      if (game.characterInPlay.hasTrait(Trait.oddRoll) !=
+                          null) {
                         if (rolled!.value % 2 == 1) {
                           Navigator.push(
                               context,
                               ActionRoute(
-                                  builder: (context) =>
-                                      TraitRollChooseDialog(CID.gertrud)));
+                                  builder: (context) => TraitRollChooseDialog(
+                                      game.characterInPlay
+                                          .hasTrait(Trait.oddRoll)!)));
                         }
                       }
-                      if (game.characterInPlay.ids.contains(CID.ivan)) {
+                      if (game.characterInPlay.hasTrait(Trait.evenRoll) !=
+                          null) {
                         if (rolled!.value % 2 == 0) {
                           Navigator.push(
                               context,
                               ActionRoute(
-                                  builder: (context) =>
-                                      TraitRollChooseDialog(CID.ivan)));
+                                  builder: (context) => TraitRollChooseDialog(
+                                      game.characterInPlay
+                                          .hasTrait(Trait.evenRoll)!)));
                         }
                       }
                     },

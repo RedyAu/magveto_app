@@ -23,13 +23,15 @@ class RoadsSection extends StatelessWidget {
               preferBelow: false,
               message: game.characterInPlay.currentLocation!.type ==
                       LocationType.outpost
-                  ? "Csak 2. (gyülekezeti ház) és 3. (templomos gyülekezet) szinten elérhető!"
+                  ? "Csak 2. (gyülekezeti ház) és 3. (templomos gyülekezet) szinten elérhető!\nKivéve útépítő karakterek."
                   : "",
               child: Hero(
                 tag: "build_road",
                 child: ElevatedButton.icon(
                   onPressed: game.characterInPlay.currentLocation!.type ==
-                          LocationType.outpost
+                              LocationType.outpost &&
+                          !(game.characterInPlay.hasTrait(Trait.freeRoad) !=
+                              null)
                       ? null
                       : () {
                           Navigator.push(

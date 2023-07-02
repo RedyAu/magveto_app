@@ -40,7 +40,7 @@ List<Team> getDefaultTeams() => [
             characterDescriptions[CID.bernadette]!),
       ]),
     ];
-    
+
 Map<CID, String> characterNames = {
   CID.joe: "Joe, az áldott",
   CID.mary: "Mary, a szervező",
@@ -59,7 +59,7 @@ Map<CID, String> characterNames = {
 Map<CID, String> characterDescriptions = {
   CID.joe: //! how the hell even
       "Ha valaki áldást kap, Joe is részesedik belőle (ő is kap egy áldáscsillagot).",
-  CID.mary:
+  CID.mary: //? done
       "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
   CID.janos: //? done
       "Ha valaki igeolvasáson vesz részt (1-est dob), János is ott van (ő is kap egy igekártyát).",
@@ -71,7 +71,7 @@ Map<CID, String> characterDescriptions = {
       "Ha páratlant dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
   CID.teofil: //? done
       "Ha valaki diakóniai eseményen vesz részt (3-ast dob), Teofil is segít (ő is kap egy diakóniakártyát).",
-  CID.teofilia:
+  CID.teofilia: //? done
       "Minden körben szabadon (ellenérték nélkül) lerakhat egy útelemet, ha szüksége van rá.",
   CID.ivan: //? done
       "Ha párosat dob, a felhúzott kártyáján túl még egy olyan ige-, ima-, vagy diakóniakártyát is felvehet, amilyenre a legnagyobb szüksége van.",
@@ -81,4 +81,16 @@ Map<CID, String> characterDescriptions = {
       "Ha valaki imádkozik (2-est dob), Jean-Philip is vele tart (ő is kap egy imakártyát).",
   CID.bernadette:
       "Ahhoz, hogy temploma megépüljön, csak két gyülekezeti szolgálatot kell beindítania.",
+};
+
+final Map<Trait, List<CID?>> traitMap = {
+  Trait.freeRoad: [CID.mary, CID.teofilia],
+  Trait.thirdService: [CID.maria, CID.bernadette],
+  Trait.thirdTile: [CID.hansi, CID.tatjana],
+  Trait.oddRoll: [CID.gertrud],
+  Trait.evenRoll: [CID.ivan],
+  Trait.scriptureRoll: [CID.janos],
+  Trait.prayerRoll: [CID.jeanphilip],
+  Trait.charityRoll: [CID.teofil],
+  Trait.allBlessing: [CID.joe],
 };

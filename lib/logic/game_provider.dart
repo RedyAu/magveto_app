@@ -46,6 +46,9 @@ class GameProvider extends ChangeNotifier {
   }
 
   void advanceCharacters() {
+    //! Before advance logic
+    characterInPlay.usedTrait = {};
+
     _characterOfTeamInPlay++;
     if (_characterOfTeamInPlay >= teamInPlay.characters.length) {
       _characterOfTeamInPlay = 0;
@@ -58,7 +61,7 @@ class GameProvider extends ChangeNotifier {
       //! Post team logic
     }
     //! Post character logic
-    rollsLeft = 1; // TODO maybe make this a field of the character?
+    rollsLeft = 1; // TODO maybe make this a field of the character? - yes. definitely.
     notifyListeners();
   }
 
